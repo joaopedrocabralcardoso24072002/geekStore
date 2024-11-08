@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace geekStore
 {
-    public partial class Form1 : Form
+    public partial class frmSplash : Form
     {
-        public Form1()
+        public frmSplash()
         {
             InitializeComponent();
         }
