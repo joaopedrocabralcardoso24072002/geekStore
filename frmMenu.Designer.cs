@@ -52,7 +52,7 @@
             this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFechar.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFechar.ForeColor = System.Drawing.Color.White;
-            this.btnFechar.Location = new System.Drawing.Point(825, 502);
+            this.btnFechar.Location = new System.Drawing.Point(785, 645);
             this.btnFechar.Margin = new System.Windows.Forms.Padding(6);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(100, 40);
@@ -75,7 +75,7 @@
             this.strMenu.Location = new System.Drawing.Point(0, 0);
             this.strMenu.Name = "strMenu";
             this.strMenu.Padding = new System.Windows.Forms.Padding(10, 4, 0, 4);
-            this.strMenu.Size = new System.Drawing.Size(940, 40);
+            this.strMenu.Size = new System.Drawing.Size(900, 40);
             this.strMenu.TabIndex = 1;
             this.strMenu.Text = "menuStrip1";
             // 
@@ -92,13 +92,13 @@
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(157, 32);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
             this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // produtosToolStripMenuItem
             // 
             this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
-            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(157, 32);
+            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
             this.produtosToolStripMenuItem.Text = "Produtos";
             // 
             // vendasToolStripMenuItem
@@ -138,12 +138,12 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(34)))));
-            this.ClientSize = new System.Drawing.Size(940, 557);
+            this.ClientSize = new System.Drawing.Size(900, 700);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.strMenu);
             this.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.strMenu;
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "frmMenu";

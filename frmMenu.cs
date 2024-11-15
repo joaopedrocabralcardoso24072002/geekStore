@@ -14,18 +14,9 @@ namespace geekStore
 {
     public partial class frmMenu : Form
     {
-        public frmMenu(bool showSplash = true)
+        public frmMenu()
         {
             InitializeComponent();
-
-            if (showSplash)
-            {
-                frmSplash splash = new frmSplash();
-                splash.Show();
-                Application.DoEvents();
-                Thread.Sleep(/*3000*/1000);
-                splash.Close();
-            }
         }
 
         private void btnFechar_Click(object sender, EventArgs e)

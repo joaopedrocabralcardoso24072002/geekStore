@@ -38,7 +38,8 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = global::geekStore.Properties.Resources.geekStoreLogo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(600, 475);
+            this.ClientSize = new System.Drawing.Size(600, 466);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

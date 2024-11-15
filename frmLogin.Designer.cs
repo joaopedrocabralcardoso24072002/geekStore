@@ -28,67 +28,187 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblSenha = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnCadastrar = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnFechar = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lblSenha = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblSenha
-            // 
-            this.lblSenha.AutoSize = true;
-            this.lblSenha.Location = new System.Drawing.Point(12, 130);
-            this.lblSenha.Name = "lblSenha";
-            this.lblSenha.Size = new System.Drawing.Size(60, 28);
-            this.lblSenha.TabIndex = 1;
-            this.lblSenha.Text = "Senha";
             // 
             // txtUsuario
             // 
             this.txtUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            this.txtUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUsuario.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtUsuario.Location = new System.Drawing.Point(17, 91);
+            this.txtUsuario.Location = new System.Drawing.Point(15, 197);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(6, 3, 6, 6);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(455, 36);
+            this.txtUsuario.Size = new System.Drawing.Size(570, 36);
             this.txtUsuario.TabIndex = 2;
             // 
             // txtSenha
             // 
             this.txtSenha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            this.txtSenha.Location = new System.Drawing.Point(17, 161);
+            this.txtSenha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSenha.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtSenha.Location = new System.Drawing.Point(15, 279);
+            this.txtSenha.Margin = new System.Windows.Forms.Padding(6, 3, 6, 6);
             this.txtSenha.Name = "txtSenha";
-            this.txtSenha.PasswordChar = '₢';
-            this.txtSenha.Size = new System.Drawing.Size(455, 36);
+            this.txtSenha.PasswordChar = '*';
+            this.txtSenha.Size = new System.Drawing.Size(570, 36);
             this.txtSenha.TabIndex = 3;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::geekStore.Properties.Resources.eye_closed_30;
+            this.pictureBox2.Location = new System.Drawing.Point(551, 282);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
+            // 
+            // btnCadastrar
+            // 
+            this.btnCadastrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCadastrar.AutoSize = true;
+            this.btnCadastrar.BackColor = System.Drawing.Color.Transparent;
+            this.btnCadastrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCadastrar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCadastrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnCadastrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCadastrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCadastrar.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCadastrar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCadastrar.Image = global::geekStore.Properties.Resources.register_303;
+            this.btnCadastrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCadastrar.Location = new System.Drawing.Point(240, 411);
+            this.btnCadastrar.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCadastrar.Name = "btnCadastrar";
+            this.btnCadastrar.Size = new System.Drawing.Size(134, 40);
+            this.btnCadastrar.TabIndex = 8;
+            this.btnCadastrar.Text = "Cadastrar";
+            this.btnCadastrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCadastrar.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::geekStore.Properties.Resources.geekStoreLogo;
+            this.pictureBox1.Location = new System.Drawing.Point(210, 12);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(201, 3, 201, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(180, 140);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogin.AutoSize = true;
+            this.btnLogin.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SeaGreen;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogin.Image = global::geekStore.Properties.Resources.login_30;
+            this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogin.Location = new System.Drawing.Point(485, 411);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(6);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(100, 40);
+            this.btnLogin.TabIndex = 6;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLogin.UseVisualStyleBackColor = false;
+            // 
+            // btnFechar
+            // 
+            this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFechar.AutoSize = true;
+            this.btnFechar.BackColor = System.Drawing.Color.Transparent;
+            this.btnFechar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFechar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnFechar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.btnFechar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFechar.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFechar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnFechar.Image = global::geekStore.Properties.Resources.close_30;
+            this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFechar.Location = new System.Drawing.Point(15, 411);
+            this.btnFechar.Margin = new System.Windows.Forms.Padding(6);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(108, 40);
+            this.btnFechar.TabIndex = 5;
+            this.btnFechar.Text = "Fechar";
+            this.btnFechar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFechar.UseVisualStyleBackColor = false;
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(12, 438);
+            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Silver;
+            this.linkLabel1.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Image = global::geekStore.Properties.Resources.forgot_password_20;
+            this.linkLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.linkLabel1.LinkColor = System.Drawing.Color.WhiteSmoke;
+            this.linkLabel1.Location = new System.Drawing.Point(15, 321);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(136, 28);
+            this.linkLabel1.Size = new System.Drawing.Size(140, 28);
             this.linkLabel1.TabIndex = 4;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Esqueci a senha";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
+            // 
+            // lblSenha
+            // 
+            this.lblSenha.Image = global::geekStore.Properties.Resources.password_30;
+            this.lblSenha.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSenha.Location = new System.Drawing.Point(15, 245);
+            this.lblSenha.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
+            this.lblSenha.Name = "lblSenha";
+            this.lblSenha.Size = new System.Drawing.Size(92, 28);
+            this.lblSenha.TabIndex = 1;
+            this.lblSenha.Text = "Senha";
+            this.lblSenha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblUsuario
             // 
-            this.lblUsuario.Image = global::geekStore.Properties.Resources.user;
+            this.lblUsuario.Image = global::geekStore.Properties.Resources.user_30;
             this.lblUsuario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblUsuario.Location = new System.Drawing.Point(12, 60);
+            this.lblUsuario.Location = new System.Drawing.Point(15, 163);
+            this.lblUsuario.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(257, 28);
+            this.lblUsuario.Size = new System.Drawing.Size(103, 28);
             this.lblUsuario.TabIndex = 0;
             this.lblUsuario.Text = "Usuário";
-            this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(34)))));
-            this.ClientSize = new System.Drawing.Size(600, 475);
+            this.ClientSize = new System.Drawing.Size(600, 466);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.btnCadastrar);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtUsuario);
@@ -97,9 +217,13 @@
             this.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,5 +236,10 @@
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button btnFechar;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnCadastrar;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,9 +13,23 @@ namespace geekStore
 {
     public partial class frmLogin : Form
     {
-        public frmLogin()
+        public frmLogin(bool showSplash = true)
         {
             InitializeComponent();
+
+            if (showSplash)
+            {
+                frmSplash splash = new frmSplash();
+                splash.Show();
+                Application.DoEvents();
+                Thread.Sleep(3000);
+                splash.Close();
+            }
+        }
+
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
