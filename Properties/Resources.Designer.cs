@@ -63,9 +63,49 @@ namespace geekStore.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap back_30 {
+            get {
+                object obj = ResourceManager.GetObject("back_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clear_30 {
+            get {
+                object obj = ResourceManager.GetObject("clear_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap close_30 {
             get {
                 object obj = ResourceManager.GetObject("close_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete_30 {
+            get {
+                object obj = ResourceManager.GetObject("delete_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit_30 {
+            get {
+                object obj = ResourceManager.GetObject("edit_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -111,11 +151,91 @@ namespace geekStore.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
+        internal static byte[] geekStoreIcon {
+            get {
+                object obj = ResourceManager.GetObject("geekStoreIcon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap geekStoreLogo {
             get {
                 object obj = ResourceManager.GetObject("geekStoreLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap geekStoreLogo_bg {
+            get {
+                object obj = ResourceManager.GetObject("geekStoreLogo_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap geekStoreLogo_bg1 {
+            get {
+                object obj = ResourceManager.GetObject("geekStoreLogo_bg1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap geekStoreLogo_bg2 {
+            get {
+                object obj = ResourceManager.GetObject("geekStoreLogo_bg2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap geekStoreLogo_bg3 {
+            get {
+                object obj = ResourceManager.GetObject("geekStoreLogo_bg3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap img_30 {
+            get {
+                object obj = ResourceManager.GetObject("img_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap img_301 {
+            get {
+                object obj = ResourceManager.GetObject("img_301", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap insert_30 {
+            get {
+                object obj = ResourceManager.GetObject("insert_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,6 +323,16 @@ namespace geekStore.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap search_30 {
+            get {
+                object obj = ResourceManager.GetObject("search_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap user {
             get {
                 object obj = ResourceManager.GetObject("user", resourceCulture);
@@ -227,6 +357,16 @@ namespace geekStore.Properties {
             get {
                 object obj = ResourceManager.GetObject("user_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
+        internal static byte[] userIcon {
+            get {
+                object obj = ResourceManager.GetObject("userIcon", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

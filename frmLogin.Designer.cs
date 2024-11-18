@@ -31,16 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pbxOlho = new System.Windows.Forms.PictureBox();
             this.btnCadastrar = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbxLogo = new System.Windows.Forms.PictureBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lnkEsqSenha = new System.Windows.Forms.LinkLabel();
             this.lblSenha = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxOlho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUsuario
@@ -65,16 +65,20 @@
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(570, 36);
             this.txtSenha.TabIndex = 3;
+            this.txtSenha.TextChanged += new System.EventHandler(this.txtSenha_TextChanged);
             // 
-            // pictureBox2
+            // pbxOlho
             // 
-            this.pictureBox2.Image = global::geekStore.Properties.Resources.eye_closed_30;
-            this.pictureBox2.Location = new System.Drawing.Point(551, 282);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
+            this.pbxOlho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbxOlho.Image = global::geekStore.Properties.Resources.eye_closed_30;
+            this.pbxOlho.Location = new System.Drawing.Point(551, 282);
+            this.pbxOlho.Name = "pbxOlho";
+            this.pbxOlho.Size = new System.Drawing.Size(30, 30);
+            this.pbxOlho.TabIndex = 9;
+            this.pbxOlho.TabStop = false;
+            this.pbxOlho.Tag = "eye_closed";
+            this.pbxOlho.Visible = false;
+            this.pbxOlho.Click += new System.EventHandler(this.pbxOlho_Click);
             // 
             // btnCadastrar
             // 
@@ -98,17 +102,18 @@
             this.btnCadastrar.Text = "Cadastrar";
             this.btnCadastrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCadastrar.UseVisualStyleBackColor = false;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
-            // pictureBox1
+            // pbxLogo
             // 
-            this.pictureBox1.Image = global::geekStore.Properties.Resources.geekStoreLogo;
-            this.pictureBox1.Location = new System.Drawing.Point(210, 12);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(201, 3, 201, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(180, 140);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.pbxLogo.Image = global::geekStore.Properties.Resources.geekStoreLogo;
+            this.pbxLogo.Location = new System.Drawing.Point(210, 12);
+            this.pbxLogo.Margin = new System.Windows.Forms.Padding(201, 3, 201, 3);
+            this.pbxLogo.Name = "pbxLogo";
+            this.pbxLogo.Size = new System.Drawing.Size(180, 140);
+            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxLogo.TabIndex = 7;
+            this.pbxLogo.TabStop = false;
             // 
             // btnLogin
             // 
@@ -132,6 +137,7 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnFechar
             // 
@@ -157,22 +163,23 @@
             this.btnFechar.UseVisualStyleBackColor = false;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // linkLabel1
+            // lnkEsqSenha
             // 
-            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Silver;
-            this.linkLabel1.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Image = global::geekStore.Properties.Resources.forgot_password_20;
-            this.linkLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.linkLabel1.LinkColor = System.Drawing.Color.WhiteSmoke;
-            this.linkLabel1.Location = new System.Drawing.Point(15, 321);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(140, 28);
-            this.linkLabel1.TabIndex = 4;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Esqueci a senha";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
+            this.lnkEsqSenha.ActiveLinkColor = System.Drawing.Color.Silver;
+            this.lnkEsqSenha.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkEsqSenha.Image = global::geekStore.Properties.Resources.forgot_password_20;
+            this.lnkEsqSenha.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkEsqSenha.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkEsqSenha.LinkColor = System.Drawing.Color.WhiteSmoke;
+            this.lnkEsqSenha.Location = new System.Drawing.Point(22, 321);
+            this.lnkEsqSenha.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.lnkEsqSenha.Name = "lnkEsqSenha";
+            this.lnkEsqSenha.Size = new System.Drawing.Size(140, 28);
+            this.lnkEsqSenha.TabIndex = 4;
+            this.lnkEsqSenha.TabStop = true;
+            this.lnkEsqSenha.Text = "Esqueci a senha";
+            this.lnkEsqSenha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkEsqSenha.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
             // 
             // lblSenha
             // 
@@ -204,12 +211,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(600, 466);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pbxOlho);
             this.Controls.Add(this.btnCadastrar);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbxLogo);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnFechar);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.lnkEsqSenha);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.lblSenha);
@@ -222,8 +229,8 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxOlho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,11 +242,11 @@
         private System.Windows.Forms.Label lblSenha;
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtSenha;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lnkEsqSenha;
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbxLogo;
         private System.Windows.Forms.Button btnCadastrar;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pbxOlho;
     }
 }

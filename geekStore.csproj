@@ -145,6 +145,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>dbGeekStore.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\clear_30.png" />
+    <None Include="Resources\delete_30.png" />
+    <None Include="Resources\edit_30.png" />
+    <None Include="Resources\insert_30.png" />
+    <None Include="Resources\search_30.png" />
+    <None Include="Resources\img_302.png" />
+    <None Include="Resources\img_301.png" />
+    <None Include="Resources\geekStoreLogo_bg3.png" />
+    <None Include="Resources\geekStoreLogo_bg2.png" />
+    <None Include="Resources\geekStoreLogo_bg1.png" />
+    <None Include="Resources\geekStoreLogo_bg.png" />
+    <None Include="Resources\back_30.png" />
     <None Include="Resources\eye_closed_30.png" />
     <None Include="Resources\eye_open_30.png" />
     <None Include="Resources\register_303.png" />

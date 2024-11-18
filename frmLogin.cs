@@ -1,4 +1,5 @@
-﻿using System;
+﻿using geekStore.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,6 +31,49 @@ namespace geekStore
         private void btnFechar_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void txtSenha_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSenha.Text == string.Empty)
+            {
+                pbxOlho.Visible = false;
+            } 
+            else
+            {
+                pbxOlho.Visible = true;
+            }
+        }
+
+        private void pbxOlho_Click(object sender, EventArgs e)
+        {
+            if (pbxOlho.Tag?.ToString() != "eye_open")
+            {
+                pbxOlho.Image = Properties.Resources.eye_open_30;
+                pbxOlho.Tag = "eye_open";
+                txtSenha.PasswordChar = '\0';
+            }
+            else
+            {
+                pbxOlho.Image = Properties.Resources.eye_closed_30;
+                pbxOlho.Tag = "eye_closed";
+                txtSenha.PasswordChar = '*';
+            }
+        }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            frmCadCli cadCli = new frmCadCli();
+            this.Hide();
+            cadCli.ShowDialog();
+            this.Show();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            frmMenu menu = new frmMenu();
+            menu.ShowDialog();
+            this.Hide();
         }
     }
 }

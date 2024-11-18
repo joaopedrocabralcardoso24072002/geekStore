@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnFechar = new System.Windows.Forms.Button();
             this.strMenu = new System.Windows.Forms.MenuStrip();
             this.cadastroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,29 +36,9 @@
             this.demonstrativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnFechar = new System.Windows.Forms.Button();
             this.strMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnFechar
-            // 
-            this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFechar.AutoSize = true;
-            this.btnFechar.BackColor = System.Drawing.Color.Transparent;
-            this.btnFechar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFechar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnFechar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.btnFechar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFechar.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFechar.ForeColor = System.Drawing.Color.White;
-            this.btnFechar.Location = new System.Drawing.Point(785, 645);
-            this.btnFechar.Margin = new System.Windows.Forms.Padding(6);
-            this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(100, 40);
-            this.btnFechar.TabIndex = 0;
-            this.btnFechar.Text = "Fechar";
-            this.btnFechar.UseVisualStyleBackColor = false;
-            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // strMenu
             // 
@@ -92,13 +71,13 @@
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(157, 32);
             this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // produtosToolStripMenuItem
             // 
             this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
-            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(157, 32);
             this.produtosToolStripMenuItem.Text = "Produtos";
             // 
             // vendasToolStripMenuItem
@@ -131,6 +110,30 @@
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.btnFechar_Click);
             // 
+            // btnFechar
+            // 
+            this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFechar.AutoSize = true;
+            this.btnFechar.BackColor = System.Drawing.Color.Transparent;
+            this.btnFechar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFechar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnFechar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.btnFechar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFechar.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFechar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnFechar.Image = global::geekStore.Properties.Resources.close_30;
+            this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFechar.Location = new System.Drawing.Point(777, 645);
+            this.btnFechar.Margin = new System.Windows.Forms.Padding(6);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(108, 40);
+            this.btnFechar.TabIndex = 6;
+            this.btnFechar.Text = "Fechar";
+            this.btnFechar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFechar.UseVisualStyleBackColor = false;
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 28F);
@@ -149,7 +152,6 @@
             this.Name = "frmMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.strMenu.ResumeLayout(false);
             this.strMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -158,8 +160,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.MenuStrip strMenu;
         private System.Windows.Forms.ToolStripMenuItem cadastroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
@@ -168,5 +168,6 @@
         private System.Windows.Forms.ToolStripMenuItem demonstrativoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
+        private System.Windows.Forms.Button btnFechar;
     }
 }
