@@ -27,5 +27,13 @@ namespace geekStore
                 Environment.Exit(0);
             }
         }
+
+        private void produtosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCadProd cadProd = new frmCadProd();
+            this.Hide();
+            cadProd.ShowDialog();
+            this.Show();
+        }
     }
 }

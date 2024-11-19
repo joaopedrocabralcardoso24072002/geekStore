@@ -131,23 +131,34 @@
             // cbxTipo
             // 
             this.cbxTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbxTipo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
             this.cbxTipo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            this.cbxTipo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbxTipo.Cursor = System.Windows.Forms.Cursors.Default;
             this.cbxTipo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbxTipo.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxTipo.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.cbxTipo.FormattingEnabled = true;
             this.cbxTipo.Location = new System.Drawing.Point(15, 232);
             this.cbxTipo.Margin = new System.Windows.Forms.Padding(6, 3, 6, 6);
             this.cbxTipo.Name = "cbxTipo";
-            this.cbxTipo.Size = new System.Drawing.Size(252, 29);
+            this.cbxTipo.Size = new System.Drawing.Size(252, 25);
             this.cbxTipo.TabIndex = 29;
             // 
             // dgvProduto
             // 
+            this.dgvProduto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvProduto.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dgvProduto.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            this.dgvProduto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvProduto.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgvProduto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dgvProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProduto.GridColor = System.Drawing.Color.Black;
             this.dgvProduto.Location = new System.Drawing.Point(15, 273);
             this.dgvProduto.Margin = new System.Windows.Forms.Padding(6);
             this.dgvProduto.Name = "dgvProduto";
+            this.dgvProduto.RowHeadersWidth = 30;
+            this.dgvProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgvProduto.Size = new System.Drawing.Size(570, 178);
             this.dgvProduto.TabIndex = 31;
             // 
@@ -287,6 +298,7 @@
             // pbxImagem
             // 
             this.pbxImagem.BackColor = System.Drawing.Color.Transparent;
+            this.pbxImagem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbxImagem.Location = new System.Drawing.Point(279, 29);
             this.pbxImagem.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.pbxImagem.Name = "pbxImagem";
@@ -308,7 +320,7 @@
             this.btnImagem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnImagem.Image = global::geekStore.Properties.Resources.img_301;
             this.btnImagem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImagem.Location = new System.Drawing.Point(419, 169);
+            this.btnImagem.Location = new System.Drawing.Point(418, 168);
             this.btnImagem.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
             this.btnImagem.Name = "btnImagem";
             this.btnImagem.Size = new System.Drawing.Size(40, 40);
@@ -337,6 +349,7 @@
             this.btnVoltar.Text = "Voltar";
             this.btnVoltar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVoltar.UseVisualStyleBackColor = false;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
             // frmCadProd
             // 
@@ -366,7 +379,9 @@
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmCadProd";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCadProd";
+            this.Load += new System.EventHandler(this.frmCadProd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagem)).EndInit();
             this.ResumeLayout(false);

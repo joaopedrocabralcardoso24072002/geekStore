@@ -1,1 +1,1 @@
- SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConsultorioDB"].ConnectionString);
+SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConsultorioDB"].ConnectionString);

@@ -72,8 +72,8 @@ namespace geekStore
         private void btnLogin_Click(object sender, EventArgs e)
         {
             frmMenu menu = new frmMenu();
-            menu.ShowDialog();
             this.Hide();
+            menu.ShowDialog();
         }
     }
 }
