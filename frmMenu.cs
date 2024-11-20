@@ -28,6 +28,14 @@ namespace geekStore
             }
         }
 
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCadCli cadCli = new frmCadCli();
+            this.Hide();
+            cadCli.ShowDialog();
+            this.Show();
+        }
+
         private void produtosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmCadProd cadProd = new frmCadProd();

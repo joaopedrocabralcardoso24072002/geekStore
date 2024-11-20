@@ -305,6 +305,7 @@
             this.pbxImagem.Size = new System.Drawing.Size(180, 180);
             this.pbxImagem.TabIndex = 30;
             this.pbxImagem.TabStop = false;
+            this.pbxImagem.MouseHover += new System.EventHandler(this.pbxImagem_MouseHover);
             // 
             // btnImagem
             // 
@@ -313,20 +314,20 @@
             this.btnImagem.BackColor = System.Drawing.Color.Transparent;
             this.btnImagem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnImagem.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnImagem.FlatAppearance.BorderSize = 0;
             this.btnImagem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
             this.btnImagem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue;
             this.btnImagem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImagem.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImagem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnImagem.Image = global::geekStore.Properties.Resources.img_301;
-            this.btnImagem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImagem.Location = new System.Drawing.Point(418, 168);
+            this.btnImagem.Location = new System.Drawing.Point(422, 172);
             this.btnImagem.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
             this.btnImagem.Name = "btnImagem";
-            this.btnImagem.Size = new System.Drawing.Size(40, 40);
+            this.btnImagem.Size = new System.Drawing.Size(36, 36);
             this.btnImagem.TabIndex = 28;
-            this.btnImagem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnImagem.UseVisualStyleBackColor = false;
+            this.btnImagem.Click += new System.EventHandler(this.btnImagem_Click);
             // 
             // btnVoltar
             // 

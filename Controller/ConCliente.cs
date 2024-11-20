@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace geekStore.Models
+namespace geekStore.Controller
 {
-    internal class models
+    internal class ConCliente
     {
     }
 }

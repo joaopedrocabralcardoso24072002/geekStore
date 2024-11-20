@@ -63,7 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\controller.cs" />
+    <Compile Include="Controller\ConCliente.cs" />
+    <Compile Include="Controller\ConProduto.cs" />
     <Compile Include="frmCadCli.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,7 +95,8 @@
     <Compile Include="frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\models.cs" />
+    <Compile Include="Models\ModCliente.cs" />
+    <Compile Include="Models\ModProduto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCadCli.resx">
