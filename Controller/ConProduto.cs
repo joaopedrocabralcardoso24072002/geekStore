@@ -19,7 +19,10 @@ namespace geekStore.Controller
         {
             List<ModProduto> li = new List<ModProduto>();
 
-            string sql = "SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo FROM Produtos p JOIN Tipos t ON p.idTipo = t.Id;";
+            string sql = "SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo " +
+                         "FROM Produtos p " +
+                         "JOIN Tipos t " +
+                         "ON p.idTipo = t.Id";
 
             if (con.State == ConnectionState.Open)
             {
@@ -122,40 +125,76 @@ namespace geekStore.Controller
             }
         }
 
-        public void Localizar(int Id = -1, string nomeProd = null)
+        public ModProduto Localizar(int Id)
         {
+            ModProduto modProduto = null;
             try
             {
-                // Busca por Id
-                if (Id > -1 && nomeProd == null)
+                string sql = $"SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo " +
+                             $"FROM Produtos p " +
+                             $"JOIN Tipos t " +
+                             $"ON p.idTipo = t.Id " +
+                             $"WHERE p.Id = {Id}";
+
+                if (con.State == ConnectionState.Open)
                 {
-                    string sql = $"SELECT * FROM Produtos WHERE Id = '{Id}'";
-
-                    if (con.State == ConnectionState.Open)
-                    {
-                        con.Close();
-                    }
-                    con.Open();
-
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        
-                    }
-                    dr.Close();
                     con.Close();
                 }
-                // Busca por nome
-                else if (Id == -1 && nomeProd != null)
-                {
+                con.Open();
 
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    modProduto = new ModProduto
+                    {
+                        Id = (int)dr["Id"],
+                        nome = dr["nome"].ToString(),
+                        preco = (decimal)dr["preco"],
+                        quantidade = (int)dr["quantidade"],
+                        foto = dr["foto"].ToString(),
+                        tipo = dr["tipo"].ToString()
+                    };
                 }
+
+                dr.Close();
+                con.Close();
+
+                return modProduto;
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
+        }
+
+        public bool RegistroRepetido(string nome, int idTipo)
+        {
+            string sql = $"SELECT * " +
+                         $"FROM Produtos" +
+                         $"WHERE nome = {nome}" +
+                         $"AND idTipo = {idTipo}";
+
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(sql ,con);
+
+            cmd.ExecuteNonQuery();
+
+            var result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                return true;
+            }
+
+            con.Close();
+            
+            return false;
         }
     }
 }

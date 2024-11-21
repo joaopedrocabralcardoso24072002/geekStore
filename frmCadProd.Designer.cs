@@ -205,6 +205,7 @@
             this.btnLimparCampos.Text = "Limpar Campos";
             this.btnLimparCampos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimparCampos.UseVisualStyleBackColor = false;
+            this.btnLimparCampos.Click += new System.EventHandler(this.btnLimparCampos_Click);
             // 
             // btnExcluir
             // 
@@ -271,6 +272,7 @@
             this.btnInserir.Text = "Inserir";
             this.btnInserir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnInserir.UseVisualStyleBackColor = false;
+            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // btnPesquisar
             // 
@@ -303,9 +305,9 @@
             this.pbxImagem.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.pbxImagem.Name = "pbxImagem";
             this.pbxImagem.Size = new System.Drawing.Size(180, 180);
+            this.pbxImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxImagem.TabIndex = 30;
             this.pbxImagem.TabStop = false;
-            this.pbxImagem.MouseHover += new System.EventHandler(this.pbxImagem_MouseHover);
             // 
             // btnImagem
             // 
@@ -383,6 +385,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCadProd";
             this.Load += new System.EventHandler(this.frmCadProd_Load);
+            this.Shown += new System.EventHandler(this.frmCadProd_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagem)).EndInit();
             this.ResumeLayout(false);

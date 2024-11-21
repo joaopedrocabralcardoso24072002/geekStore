@@ -19,48 +19,6 @@ namespace LojaGeek
             InitializeComponent();
         }
 
-        public void CarregaCbxTipo()
-        {
-            SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Programas\\LojaGeek\\dbGeek.mdf;Integrated Security=True");
-
-            string sql = "SELECT * FROM Tipo";
-
-            SqlCommand cmd = new SqlCommand(sql, con);
-
-            con.Open();
-
-            cmd.CommandType = CommandType.Text;
-
-            SqlDataAdapter da = new SqlDataAdapter(sql, con);
-
-            DataSet ds = new DataSet();
-
-            da.Fill(ds, "Tipo");
-
-            CbxTipo.ValueMember = "tipo";
-
-            CbxTipo.DisplayMember = "tipo";
-
-            CbxTipo.DataSource = ds.Tables["Tipo"];
-
-            con.Close();
-        }
-
-        private void btnFoto_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-
-            dialog.Title = "Selecionar imagem...";
-
-            dialog.Filter = "Arquivos de Imagem|*.bmp;*.jpg;*.jpeg;*.png;*.gif|Todos os Arquivos|*.*";
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                string imagem = dialog.FileName;
-                pbxFoto.ImageLocation = imagem;
-            }
-        }
-
         private void btnInserir_Click(object sender, EventArgs e)
         {
             if (txtNome.Text == string.Empty || txtPreco.Text == string.Empty)
@@ -240,7 +198,7 @@ namespace LojaGeek
             }
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e) -- LIMPAR OS CAMPOS!!!!!!!!!!!!!!!!!!!!!!
         {
             txtId.Text = "";
             txtNome.Text = "";
@@ -252,20 +210,6 @@ namespace LojaGeek
             this.ActiveControl = txtNome;
             btnEditar.Enabled = false;
             btnExcluir.Enabled = false;
-        }
-
-        private void pictureBox2_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip tt = new ToolTip();
-            Point p = pictureBox2.PointToClient(System.Windows.Forms.Cursor.Position);
-            if (p.X >= 18 && p.X <= 71 && p.Y >= 21 && p.Y <= 79)
-            {
-                tt.SetToolTip(this.pictureBox2, "Novo Produto");
-            }
-            else
-            {
-                tt.Hide(this.pictureBox2);
-            }
         }
     }
 }
