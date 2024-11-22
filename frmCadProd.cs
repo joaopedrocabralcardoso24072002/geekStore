@@ -23,17 +23,6 @@ namespace geekStore
             InitializeComponent();
         }
 
-        private void limpaCampos()
-        {
-            txtId.Text = string.Empty;
-            txtNome.Text = string.Empty;
-            txtPreco.Text = string.Empty;
-            txtQuantidade.Text = string.Empty;
-            cbxTipo.Text = string.Empty;
-            pbxImagem.Image = null;
-            pbxImagem.Update();
-        }
-
         private void frmCadProd_Load(object sender, EventArgs e)
         {
             btnImagem.BringToFront();
@@ -44,21 +33,51 @@ namespace geekStore
         {
 
             CarregaCbxTipo();
+
+            ConProduto conProduto = new ConProduto();
+            List<ModProduto> modProdutos = conProduto.ListaProdutos();
+            dgvProduto.DataSource = modProdutos;
+            if (dgvProduto.Columns.Contains("foto"))
+            {
+                dgvProduto.Columns["foto"].Visible = false;
+            }
+
+            btnPesquisar.Enabled = false;
+            btnLimparCampos.Enabled = false;
+            btnEditar.Enabled = false;
+            btnExcluir.Enabled = false;
+
+            txtNome.Focus();
         }
 
-        private void btnVoltar_Click(object sender, EventArgs e)
+        private void LimpaCampos()
         {
-            this.Close();
+            txtId.Text = string.Empty;
+            txtNome.Text = string.Empty;
+            txtPreco.Text = string.Empty;
+            txtQuantidade.Text = string.Empty;
+            cbxTipo.Text = string.Empty;
+            pbxImagem.Image = null;
+            pbxImagem.Update();
+
+            VerificaCampos();
         }
 
-        private void btnLimparCampos_Click(object sender, EventArgs e)
+        private void VerificaCampos()
         {
-            limpaCampos();
+            if (txtId.Text == string.Empty && txtNome.Text == string.Empty && txtPreco.Text == string.Empty && txtQuantidade.Text == string.Empty && cbxTipo.Text == string.Empty)
+            {
+                btnLimparCampos.Enabled = false;
+            }
+            else
+            {
+                btnLimparCampos.Enabled = true;
+            }
         }
 
-        public void CarregaCbxTipo()
+        private void CarregaCbxTipo()
         {
-            string sql = "SELECT * FROM Tipos";
+            string sql = "SELECT * FROM Tipos ORDER BY Id";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -73,7 +92,7 @@ namespace geekStore
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             DataSet ds = new DataSet();
             da.Fill(ds, "Tipos"); // Vai para o banco e preenche o dataSet
-            
+
             cbxTipo.ValueMember = "Id";
             cbxTipo.DisplayMember = "nome";
 
@@ -82,6 +101,73 @@ namespace geekStore
             con.Close();
 
             cbxTipo.Text = string.Empty;
+        }
+
+        private void dgvProduto_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dgvProduto.Rows[e.RowIndex];
+                row.Selected = true;
+
+                txtId.Text = row.Cells[0].Value.ToString();
+                txtNome.Text = row.Cells[1].Value.ToString();
+                txtPreco.Text = row.Cells[2].Value.ToString();
+                txtQuantidade.Text = row.Cells[3].Value.ToString();
+                cbxTipo.Text = row.Cells[5].Value.ToString();
+
+                string imagem = row.Cells[4].Value.ToString();
+                pbxImagem.Image = Image.FromFile($@"C:\Programas\geekStore\Produtos\{imagem}.jpg");
+
+                btnInserir.Enabled = false;
+                btnEditar.Enabled = true;
+                btnExcluir.Enabled = true;
+                btnLimparCampos.Enabled = true;
+            }
+        }
+
+        private void txtId_TextChanged(object sender, EventArgs e)
+        {
+            if (txtId.Text != string.Empty && txtNome.Text == string.Empty && txtPreco.Text == string.Empty && txtQuantidade.Text == string.Empty && cbxTipo.Text == string.Empty)
+            {
+                btnPesquisar.Enabled = true;
+            }
+            else
+            {
+                btnPesquisar.Enabled = false;
+            }
+
+            VerificaCampos();
+        }
+
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+            VerificaCampos();
+        }
+
+        private void txtPreco_TextChanged(object sender, EventArgs e)
+        {
+            VerificaCampos();
+        }
+
+        private void txtQuantidade_TextChanged(object sender, EventArgs e)
+        {
+            VerificaCampos();
+        }
+
+        private void cbxTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VerificaCampos();
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnLimparCampos_Click(object sender, EventArgs e)
+        {
+            LimpaCampos();
         }
 
         private void btnImagem_Click(object sender, EventArgs e)
@@ -100,9 +186,6 @@ namespace geekStore
             {
                 string imagem = dialog.FileName;
                 pbxImagem.ImageLocation = imagem;
-
-                /* Para fins de depuração */
-                txtNome.Text = imagem;
             }
         }
 
@@ -141,7 +224,7 @@ namespace geekStore
 
                         dgvProduto.DataSource = modProdutos;
 
-                        limpaCampos();
+                        LimpaCampos();
 
                         txtNome.Focus();
                     }
@@ -150,6 +233,104 @@ namespace geekStore
             catch (Exception er)
             {
                 MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(txtId.Text.Trim());
+
+                ConProduto conProduto = new ConProduto();
+                conProduto.Localizar(id);
+
+                txtNome.Text = conProduto.nome.ToString();
+                txtPreco.Text = conProduto.preco.ToString();
+                txtQuantidade.Text = conProduto.quantidade.ToString();
+                cbxTipo.Text = conProduto.tipo.ToString();
+                string imagem = txtNome.Text.Replace(" ", "");
+                pbxImagem.Image = Image.FromFile($@"C:\Programas\geekStore\Produtos\{imagem}.jpg");
+
+                btnEditar.Enabled = true;
+                btnExcluir.Enabled = true;
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(txtId.Text.Trim());
+
+                string imagem = txtNome.Text.Replace(" ", "");
+                if (pbxImagem.Image != null)
+                {
+                    pbxImagem.Image.Dispose();
+                    pbxImagem.Image = null;
+                }
+
+                int idTipo = cbxTipo.SelectedIndex;
+
+                ConProduto conProduto = new ConProduto();
+                int quantidade = Convert.ToInt32(txtQuantidade.Text);
+                conProduto.Atualizar(id, txtNome.Text, txtPreco.Text, quantidade, imagem, idTipo);
+
+                List<ModProduto> modProduto = conProduto.ListaProdutos();
+                dgvProduto.DataSource = modProduto;
+
+                LimpaCampos();
+
+                btnEditar.Enabled = false;
+                btnExcluir.Enabled = false;
+
+                txtNome.Focus();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Um Erro ocorreu: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (pbxImagem.Image != null)
+                {
+                    pbxImagem.Image.Dispose();
+                    pbxImagem.Image = null;
+                }
+
+                int id = Convert.ToInt32(txtId.Text.Trim());
+
+                ConProduto conProduto = new ConProduto();
+                conProduto.Localizar(id);
+
+                string nome = conProduto.nome;
+                string imagem = conProduto.foto;
+
+                System.IO.FileInfo fi = new System.IO.FileInfo($@"C:\Programas\geekStore\Produtos\{imagem}.jpg");
+                fi.Delete();
+
+                conProduto.Excluir(id);
+
+                MessageBox.Show("Produto excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                List<ModProduto> modProdutos = conProduto.ListaProdutos();
+                dgvProduto.DataSource = modProdutos;
+
+                LimpaCampos();
+
+                txtNome.Focus();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Um erro ocorreu: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

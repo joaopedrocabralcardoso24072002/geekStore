@@ -19,150 +19,6 @@ namespace LojaGeek
             InitializeComponent();
         }
 
-        private void btnInserir_Click(object sender, EventArgs e)
-        {
-            if (txtNome.Text == string.Empty || txtPreco.Text == string.Empty)
-            {
-                MessageBox.Show("Por favor, preencha todos os campos do formulário.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }      
-            try
-            {
-                Produto produto = new Produto();
-                if (produto.RegistroRepetido(txtNome.Text, CbxTipo.Text) == true)
-                {
-                    MessageBox.Show("Produto já existe em nossa base de dados!", "Produto repetido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtNome.Text = "";
-                    txtPreco.Text = "";
-                    CbxTipo.Text = "";
-                    txtQuantidade.Text = "";
-                    pbxFoto.Image = null;
-                    pbxFoto.Update();
-                    this.ActiveControl = txtNome;
-                    return;
-                }
-                else
-                {
-                    string foto = txtNome.Text.Replace(" ", "");
-
-                    pbxFoto.Image.Save(@"C:\Programas\LojaGeek\Produtos\" + foto + ".jpg");
-
-                    int quantidade = Convert.ToInt32(txtQuantidade.Text);
-
-                    produto.Inserir(txtNome.Text, CbxTipo.Text, quantidade, txtPreco.Text, foto);
-
-                    MessageBox.Show("Produto cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    List<Produto> produtos = produto.listaprodutos();
-
-                    dgvProduto.DataSource = produtos;
-
-                    txtNome.Text = "";
-                    txtPreco.Text = "";
-                    CbxTipo.Text = "";
-                    txtQuantidade.Text = "";
-                    pbxFoto.Image = null;
-
-                    pbxFoto.Update();
-
-                    this.ActiveControl = txtNome;
-                }
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show(er.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void FrmProduto_Load(object sender, EventArgs e)
-        {
-            CarregaCbxTipo();
-            Produto produto = new Produto();
-            List<Produto> produtos = produto.listaprodutos();
-            dgvProduto.DataSource = produtos;
-            btnEditar.Enabled = false;
-            btnExcluir.Enabled = false;
-            this.ActiveControl = txtNome;
-        }
-
-        private void dgvProduto_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = this.dgvProduto.Rows[e.RowIndex];
-                this.dgvProduto.Rows[e.RowIndex].Selected = true;
-                txtId.Text = row.Cells[0].Value.ToString();
-                txtNome.Text = row.Cells[1].Value.ToString();
-                CbxTipo.Text = row.Cells[2].Value.ToString();
-                txtQuantidade.Text = row.Cells[3].Value.ToString();
-                txtPreco.Text = row.Cells[4].Value.ToString();
-                string foto = txtNome.Text.Replace(" ", "");
-                pbxFoto.Image = Image.FromFile(@"C:\Programas\LojaGeek\Produtos\" + foto + ".jpg");
-                btnEditar.Enabled = true;
-                btnExcluir.Enabled = true;
-            }
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int Id = Convert.ToInt32(txtId.Text.Trim());
-                string foto = txtNome.Text.Replace(" ", "");
-                if (pbxFoto.Image != null)
-                {
-                    pbxFoto.Image.Dispose();
-                    pbxFoto.Image = null;
-                }
-                Produto produto = new Produto();
-                int quantidade = Convert.ToInt32(txtQuantidade.Text);
-                produto.Atualizar(Id, txtNome.Text, CbxTipo.Text, quantidade, txtPreco.Text, foto);
-                MessageBox.Show("Produto atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                List<Produto> produtos = produto.listaprodutos();
-                dgvProduto.DataSource = produtos;
-                txtNome.Text = "";
-                CbxTipo.Text = "";
-                txtQuantidade.Text = "";
-                txtPreco.Text = "";
-                pbxFoto.Image = null;
-                pbxFoto.Update();
-                this.ActiveControl = txtNome;
-                btnEditar.Enabled = false;
-                btnExcluir.Enabled = false;
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show(er.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void pbxPesquisar_Click(object sender, EventArgs e)
-        {
-            if (txtId.Text == "")
-            {
-                MessageBox.Show("Por favor, digite um ID para localizar o produto!", "Sem ID", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            try
-            {
-                int Id = Convert.ToInt32(txtId.Text.Trim());
-                Produto produto = new Produto();
-                produto.Localizar(Id);
-                txtNome.Text = produto.nome;
-                CbxTipo.Text = produto.tipo;
-                txtQuantidade.Text = Convert.ToString(produto.quantidade);
-                txtPreco.Text = Convert.ToString(produto.preco);
-                string foto = txtNome.Text.Replace(" ", "");
-                pbxFoto.Image = Image.FromFile(@"C:\Programas\LojaGeek\Clientes\" + foto + ".jpg");
-                btnEditar.Enabled = true;
-                btnExcluir.Enabled = true;
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show(er.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             try
@@ -172,17 +28,25 @@ namespace LojaGeek
                     pbxFoto.Image.Dispose();
                     pbxFoto.Image = null;
                 }
+
                 int Id = Convert.ToInt32(txtId.Text.Trim());
+
                 Produto produto = new Produto();
                 produto.Localizar(Id);
+
                 string nome = produto.nome;
                 string foto = nome.Replace(" ", "");
+
                 System.IO.FileInfo fi = new System.IO.FileInfo(@"C:\Programas\LojaGeek\Clientes\" + foto + ".jpg");
                 fi.Delete();
+
                 produto.Excluir(Id);
+
                 MessageBox.Show("Produto excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                List<Produto> produtos = produto.listaprodutos();
+                
+		List<Produto> produtos = produto.listaprodutos();
                 dgvProduto.DataSource = produtos;
+
                 txtNome.Text = "";
                 CbxTipo.Text = "";
                 txtQuantidade.Text = "";
@@ -190,26 +54,13 @@ namespace LojaGeek
                 txtId.Text = "";
                 pbxFoto.Image = null;
                 pbxFoto.Update();
+
                 this.ActiveControl = txtNome;
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e) -- LIMPAR OS CAMPOS!!!!!!!!!!!!!!!!!!!!!!
-        {
-            txtId.Text = "";
-            txtNome.Text = "";
-            CbxTipo.Text = "";
-            txtQuantidade.Text = "";
-            txtPreco.Text = "";
-            pbxFoto.Image = null;
-            pbxFoto.Update();
-            this.ActiveControl = txtNome;
-            btnEditar.Enabled = false;
-            btnExcluir.Enabled = false;
         }
     }
 }

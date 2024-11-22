@@ -15,6 +15,13 @@ namespace geekStore.Controller
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbGeekStore"].ConnectionString);
 
+        public int Id { get; set; }
+        public string nome { get; set; }
+        public decimal preco { get; set; }
+        public int quantidade { get; set; }
+        public string foto { get; set; }
+        public string tipo { get; set; }
+
         public List<ModProduto> ListaProdutos()
         {
             List<ModProduto> li = new List<ModProduto>();
@@ -82,7 +89,7 @@ namespace geekStore.Controller
             {
                 decimal precoFinal = Convert.ToDecimal(preco);
 
-                string sql = $"UPDATE Produtos SET nome = '{nome}', preco = @preco, quantidade = '{quantidade}', foto = '{foto}', idTipo = '{idTipo}')";
+                string sql = $"UPDATE Produtos SET nome = '{nome}', preco = @preco, quantidade = '{quantidade}', foto = '{foto}', idTipo = '{idTipo}' WHERE Id = {Id}";
 
                 if (con.State == ConnectionState.Open)
                 {
@@ -125,9 +132,8 @@ namespace geekStore.Controller
             }
         }
 
-        public ModProduto Localizar(int Id)
+        public void Localizar(int Id)
         {
-            ModProduto modProduto = null;
             try
             {
                 string sql = $"SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo " +
@@ -144,28 +150,21 @@ namespace geekStore.Controller
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
+                while (dr.Read())
                 {
-                    modProduto = new ModProduto
-                    {
-                        Id = (int)dr["Id"],
-                        nome = dr["nome"].ToString(),
-                        preco = (decimal)dr["preco"],
-                        quantidade = (int)dr["quantidade"],
-                        foto = dr["foto"].ToString(),
-                        tipo = dr["tipo"].ToString()
-                    };
+                    nome = dr["nome"].ToString();
+                    preco = (decimal)dr["preco"];
+                    quantidade = (int)dr["quantidade"];
+                    foto = dr["foto"].ToString();
+                    tipo = dr["tipo"].ToString();
                 }
 
                 dr.Close();
                 con.Close();
-
-                return modProduto;
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
             }
         }
 
