@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using geekStore.Controller;
 using geekStore.Models;
+using System.IO;
 
 namespace geekStore
 {
@@ -117,7 +118,8 @@ namespace geekStore
                 cbxTipo.Text = row.Cells[5].Value.ToString();
 
                 string imagem = row.Cells[4].Value.ToString();
-                pbxImagem.Image = Image.FromFile($@"C:\Programas\geekStore\Produtos\{imagem}.jpg");
+                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                pbxImagem.Image = Image.FromFile(imgUrl);
 
                 btnInserir.Enabled = false;
                 btnEditar.Enabled = true;
@@ -175,12 +177,7 @@ namespace geekStore
             OpenFileDialog dialog = new OpenFileDialog();
 
             dialog.Title = "Selecionar imagem...";
-            dialog.Filter = "Todos os arquivos de imagem|*.bmp;*.jpg;*.jpeg;*.png;*.gif | " + 
-                            "Bitmap (*.bmp;)|*.bmp | " +
-                            "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg | " +
-                            "GIF (*.gif)|*.gif | " +
-                            "PNG (*.png)|*.png | " +
-                            "Todos os Arquivos|*.*";
+            dialog.Filter = "Todos os arquivos de imagem|*.bmp;*.jpg;*.jpeg;*.png;*.gif | Bitmap (*.bmp;)|*.bmp | JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg | GIF (*.gif)|*.gif | PNG (*.png)|*.png | Todos os Arquivos|*.*";
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -201,7 +198,7 @@ namespace geekStore
                 else
                 {
                     ConProduto conProduto = new ConProduto();
-                    int idTipo = cbxTipo.SelectedIndex;
+                    int idTipo = cbxTipo.SelectedIndex + 1;
                     if (conProduto.RegistroRepetido(txtNome.Text, idTipo))
                     {
                         MessageBox.Show($"\"{txtNome.Text}\" já existe em nossa base de dados!", "Produto Repetido", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -212,7 +209,8 @@ namespace geekStore
                     else
                     {
                         string imagem = txtNome.Text.Replace(" ", "");
-                        pbxImagem.Image.Save($@"C:\Programas\geekStore\Produtos\{imagem}.jpg");
+                        string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                        pbxImagem.Image.Save(imgUrl);
 
                         int quantidade = Convert.ToInt32(txtQuantidade.Text);
 
@@ -243,14 +241,22 @@ namespace geekStore
                 int id = Convert.ToInt32(txtId.Text.Trim());
 
                 ConProduto conProduto = new ConProduto();
-                conProduto.Localizar(id);
+                bool find = conProduto.Localizar(id);
+                if (!find)
+                {
+                    MessageBox.Show("Produto não encontrado!", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtId.Focus();
+                    txtId.SelectAll();
+                    return;
+                }
 
                 txtNome.Text = conProduto.nome.ToString();
                 txtPreco.Text = conProduto.preco.ToString();
                 txtQuantidade.Text = conProduto.quantidade.ToString();
                 cbxTipo.Text = conProduto.tipo.ToString();
                 string imagem = txtNome.Text.Replace(" ", "");
-                pbxImagem.Image = Image.FromFile($@"C:\Programas\geekStore\Produtos\{imagem}.jpg");
+                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                pbxImagem.Image = Image.FromFile(imgUrl);
 
                 btnEditar.Enabled = true;
                 btnExcluir.Enabled = true;
@@ -274,7 +280,7 @@ namespace geekStore
                     pbxImagem.Image = null;
                 }
 
-                int idTipo = cbxTipo.SelectedIndex;
+                int idTipo = cbxTipo.SelectedIndex + 1;
 
                 ConProduto conProduto = new ConProduto();
                 int quantidade = Convert.ToInt32(txtQuantidade.Text);
@@ -313,8 +319,9 @@ namespace geekStore
 
                 string nome = conProduto.nome;
                 string imagem = conProduto.foto;
+                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
 
-                System.IO.FileInfo fi = new System.IO.FileInfo($@"C:\Programas\geekStore\Produtos\{imagem}.jpg");
+                System.IO.FileInfo fi = new System.IO.FileInfo(imgUrl);
                 fi.Delete();
 
                 conProduto.Excluir(id);

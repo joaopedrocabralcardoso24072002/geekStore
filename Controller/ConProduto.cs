@@ -26,10 +26,7 @@ namespace geekStore.Controller
         {
             List<ModProduto> li = new List<ModProduto>();
 
-            string sql = "SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo " +
-                         "FROM Produtos p " +
-                         "JOIN Tipos t " +
-                         "ON p.idTipo = t.Id";
+            string sql = "SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo FROM Produtos p JOIN Tipos t ON p.idTipo = t.Id";
 
             if (con.State == ConnectionState.Open)
             {
@@ -132,15 +129,11 @@ namespace geekStore.Controller
             }
         }
 
-        public void Localizar(int Id)
+        public bool Localizar(int Id)
         {
             try
             {
-                string sql = $"SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo " +
-                             $"FROM Produtos p " +
-                             $"JOIN Tipos t " +
-                             $"ON p.idTipo = t.Id " +
-                             $"WHERE p.Id = {Id}";
+                string sql = $"SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo FROM Produtos p JOIN Tipos t ON p.idTipo = t.Id WHERE p.Id = {Id}";
 
                 if (con.State == ConnectionState.Open)
                 {
@@ -150,30 +143,37 @@ namespace geekStore.Controller
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
+                if (dr.HasRows)
                 {
-                    nome = dr["nome"].ToString();
-                    preco = (decimal)dr["preco"];
-                    quantidade = (int)dr["quantidade"];
-                    foto = dr["foto"].ToString();
-                    tipo = dr["tipo"].ToString();
+                    while (dr.Read())
+                    {
+                        nome = dr["nome"].ToString();
+                        preco = (decimal)dr["preco"];
+                        quantidade = (int)dr["quantidade"];
+                        foto = dr["foto"].ToString();
+                        tipo = dr["tipo"].ToString();
+                    }
+                    dr.Close();
+                    con.Close();
+                    return true;
                 }
-
-                dr.Close();
-                con.Close();
+                else
+                {
+                    dr.Close();
+                    con.Close();
+                    return false;
+                }
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
         public bool RegistroRepetido(string nome, int idTipo)
         {
-            string sql = $"SELECT * " +
-                         $"FROM Produtos" +
-                         $"WHERE nome = {nome}" +
-                         $"AND idTipo = {idTipo}";
+            string sql = $"SELECT * FROM Produtos WHERE nome = '{nome}' AND idTipo = '{idTipo}'";
 
             if (con.State == ConnectionState.Open)
             {

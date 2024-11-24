@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="Controller\ConCliente.cs" />
     <Compile Include="Controller\ConProduto.cs" />
     <Compile Include="frmCadCli.cs">
