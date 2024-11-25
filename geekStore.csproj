@@ -143,12 +143,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dbGeekStore.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="dbGeekStore_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>dbGeekStore.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\open_eye_24.png" />
+    <None Include="Resources\closed_eye_24.png" />
     <None Include="Resources\clear_30.png" />
     <None Include="Resources\delete_30.png" />
     <None Include="Resources\edit_30.png" />

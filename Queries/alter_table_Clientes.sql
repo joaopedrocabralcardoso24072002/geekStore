@@ -1,0 +1,1 @@
+﻿ALTER TABLE Clientes ADD senha VARCHAR(255)

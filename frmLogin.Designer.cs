@@ -123,7 +123,7 @@
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SeaGreen;
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -146,8 +146,8 @@
             this.btnFechar.BackColor = System.Drawing.Color.Transparent;
             this.btnFechar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFechar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnFechar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.btnFechar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnFechar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btnFechar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFechar.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFechar.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -200,9 +200,9 @@
             this.lblUsuario.Location = new System.Drawing.Point(15, 163);
             this.lblUsuario.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(103, 28);
+            this.lblUsuario.Size = new System.Drawing.Size(100, 28);
             this.lblUsuario.TabIndex = 0;
-            this.lblUsuario.Text = "Usuário";
+            this.lblUsuario.Text = "E-mail";
             this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmLogin

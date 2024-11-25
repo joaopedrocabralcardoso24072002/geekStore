@@ -93,6 +93,16 @@ namespace geekStore.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap closed_eye_24 {
+            get {
+                object obj = ResourceManager.GetObject("closed_eye_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_30 {
             get {
                 object obj = ResourceManager.GetObject("delete_30", resourceCulture);
@@ -256,6 +266,16 @@ namespace geekStore.Properties {
         internal static System.Drawing.Bitmap login_30 {
             get {
                 object obj = ResourceManager.GetObject("login_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap open_eye_24 {
+            get {
+                object obj = ResourceManager.GetObject("open_eye_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

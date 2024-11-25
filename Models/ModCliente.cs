@@ -14,5 +14,6 @@ namespace geekStore.Models
         public string email { get; set; }
         public string telefone { get; set; }
         public DateTime dataRegistro { get; set; }
+        public string senha { get; set; }
     }
 }

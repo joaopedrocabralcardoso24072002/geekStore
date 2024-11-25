@@ -12,12 +12,15 @@ using System.Windows.Forms;
 using geekStore.Controller;
 using geekStore.Models;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Text.RegularExpressions;
 
 namespace geekStore
 {
     public partial class frmCadProd : Form
     {
         private readonly SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbGeekStore"].ConnectionString);
+        private string imgNom;
 
         public frmCadProd()
         {
@@ -60,6 +63,7 @@ namespace geekStore
             cbxTipo.Text = string.Empty;
             pbxImagem.Image = null;
             pbxImagem.Update();
+            btnInserir.Enabled = true;
 
             VerificaCampos();
         }
@@ -117,7 +121,7 @@ namespace geekStore
                 txtQuantidade.Text = row.Cells[3].Value.ToString();
                 cbxTipo.Text = row.Cells[5].Value.ToString();
 
-                string imagem = row.Cells[4].Value.ToString();
+                string imagem = txtNome.Text.Replace(" ", "");
                 string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
                 pbxImagem.Image = Image.FromFile(imgUrl);
 
@@ -125,6 +129,8 @@ namespace geekStore
                 btnEditar.Enabled = true;
                 btnExcluir.Enabled = true;
                 btnLimparCampos.Enabled = true;
+
+                imgNom = imagem;
             }
         }
 
@@ -152,9 +158,27 @@ namespace geekStore
             VerificaCampos();
         }
 
+        private void txtPreco_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(e.KeyChar >= (char)48 && e.KeyChar <= (char)57 || e.KeyChar == (char)8 || e.KeyChar == (char)44 || e.KeyChar == (char)13) || e.KeyChar == (char)32)
+            {
+                e.Handled = true;
+                MessageBox.Show("Apenas vírgula ( , ) e números permitidos!", "Entrada inválida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         private void txtQuantidade_TextChanged(object sender, EventArgs e)
         {
             VerificaCampos();
+        }
+
+        private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(e.KeyChar >= (char)48 && e.KeyChar <= (char)57 || e.KeyChar == (char)8 || e.KeyChar == (char)13) || e.KeyChar == (char)32)
+            {
+                e.Handled = true;
+                MessageBox.Show("Apenas números permitidos!", "Entrada inválida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void cbxTipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,7 +225,7 @@ namespace geekStore
                     int idTipo = cbxTipo.SelectedIndex + 1;
                     if (conProduto.RegistroRepetido(txtNome.Text, idTipo))
                     {
-                        MessageBox.Show($"\"{txtNome.Text}\" já existe em nossa base de dados!", "Produto Repetido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"\"{txtNome.Text}\" já existe em nossa base de dados!", "Produto repetido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtNome.Focus();
                         txtNome.SelectAll();
                         return;
@@ -274,6 +298,8 @@ namespace geekStore
                 int id = Convert.ToInt32(txtId.Text.Trim());
 
                 string imagem = txtNome.Text.Replace(" ", "");
+                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                pbxImagem.Image.Save(imgUrl);
                 if (pbxImagem.Image != null)
                 {
                     pbxImagem.Image.Dispose();
@@ -284,13 +310,16 @@ namespace geekStore
 
                 ConProduto conProduto = new ConProduto();
                 int quantidade = Convert.ToInt32(txtQuantidade.Text);
-                conProduto.Atualizar(id, txtNome.Text, txtPreco.Text, quantidade, imagem, idTipo);
+                conProduto.Atualizar(id, txtNome.Text, txtPreco.Text, quantidade, imgUrl, idTipo, imgNom);
 
                 List<ModProduto> modProduto = conProduto.ListaProdutos();
                 dgvProduto.DataSource = modProduto;
 
+                MessageBox.Show("Produto editado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 LimpaCampos();
 
+                btnInserir.Enabled = true;
                 btnEditar.Enabled = false;
                 btnExcluir.Enabled = false;
 
@@ -324,7 +353,7 @@ namespace geekStore
                 System.IO.FileInfo fi = new System.IO.FileInfo(imgUrl);
                 fi.Delete();
 
-                conProduto.Excluir(id);
+                conProduto.Excluir(id, nome);
 
                 MessageBox.Show("Produto excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -332,6 +361,9 @@ namespace geekStore
                 dgvProduto.DataSource = modProdutos;
 
                 LimpaCampos();
+                btnInserir.Enabled = true;
+                btnEditar.Enabled = false;
+                btnExcluir.Enabled = false;
 
                 txtNome.Focus();
             }

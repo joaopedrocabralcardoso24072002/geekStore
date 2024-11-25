@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using geekStore.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace geekStore.Controller
 {
@@ -80,7 +83,7 @@ namespace geekStore.Controller
             }
         }
 
-        public void Atualizar(int Id, string nome, string preco, int quantidade, string foto, int idTipo)
+        public void Atualizar(int Id, string nome, string preco, int quantidade, string foto, int idTipo, string imagem)
         {
             try
             {
@@ -99,6 +102,9 @@ namespace geekStore.Controller
                 cmd.ExecuteNonQuery();
 
                 con.Close();
+
+                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                File.Delete(imgUrl);
             }
             catch (Exception er)
             {
@@ -106,7 +112,7 @@ namespace geekStore.Controller
             }
         }
 
-        public void Excluir(int Id)
+        public void Excluir(int Id, string nome)
         {
             try
             {
@@ -122,6 +128,10 @@ namespace geekStore.Controller
                 cmd.ExecuteNonQuery();
 
                 con.Close();
+
+                string imagem = nome.Replace(" ", "");
+                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                File.Delete(imgUrl);
             }
             catch (Exception er)
             {
@@ -188,11 +198,11 @@ namespace geekStore.Controller
             var result = cmd.ExecuteScalar();
             if (result != null)
             {
+                con.Close();
                 return true;
             }
 
             con.Close();
-            
             return false;
         }
     }
