@@ -72,6 +72,13 @@ namespace geekStore
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (txtUsuario.Text == string.Empty || txtSenha.Text == string.Empty)
+            {
+                MessageBox.Show("E-mail ou senha incorretos!", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtUsuario.Focus();
+                return;
+            }
+
             ConCliente conCliente = new ConCliente();
             if (conCliente.LocalizarEmail(txtUsuario.Text))
             {
@@ -89,6 +96,11 @@ namespace geekStore
                     menu.ShowDialog();
                 }
             }
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            txtUsuario.Focus();
         }
     }
 }

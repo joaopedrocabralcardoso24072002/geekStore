@@ -66,6 +66,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Controller\ConCliente.cs" />
     <Compile Include="Controller\ConProduto.cs" />
+    <Compile Include="CustomColorTable.cs" />
     <Compile Include="frmCadCli.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +78,12 @@
     </Compile>
     <Compile Include="frmCadProd.Designer.cs">
       <DependentUpon>frmCadProd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDemonstrativo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDemonstrativo.Designer.cs">
+      <DependentUpon>frmDemonstrativo.cs</DependentUpon>
     </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
@@ -90,11 +97,23 @@
     <Compile Include="frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSobre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSobre.Designer.cs">
+      <DependentUpon>frmSobre.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVendas.Designer.cs">
+      <DependentUpon>frmVendas.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ModCliente.cs" />
     <Compile Include="Models\ModProduto.cs" />
@@ -114,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVendas.resx">
+      <DependentUpon>frmVendas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -149,6 +171,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>dbGeekStore.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\add_cart_30.png" />
+    <None Include="Resources\filter_30.png" />
+    <None Include="Resources\about_100.png" />
+    <None Include="Resources\about_150.png" />
+    <None Include="Resources\demonstrative_100.png" />
+    <None Include="Resources\products_100.png" />
+    <None Include="Resources\products_box_100.png" />
     <None Include="Resources\open_eye_24.png" />
     <None Include="Resources\closed_eye_24.png" />
     <None Include="Resources\clear_30.png" />

@@ -63,6 +63,36 @@ namespace geekStore.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap about_100 {
+            get {
+                object obj = ResourceManager.GetObject("about_100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap about_150 {
+            get {
+                object obj = ResourceManager.GetObject("about_150", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add_cart_30 {
+            get {
+                object obj = ResourceManager.GetObject("add_cart_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap back_30 {
             get {
                 object obj = ResourceManager.GetObject("back_30", resourceCulture);
@@ -113,6 +143,16 @@ namespace geekStore.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap demonstrative_100 {
+            get {
+                object obj = ResourceManager.GetObject("demonstrative_100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_30 {
             get {
                 object obj = ResourceManager.GetObject("edit_30", resourceCulture);
@@ -136,6 +176,16 @@ namespace geekStore.Properties {
         internal static System.Drawing.Bitmap eye_open_30 {
             get {
                 object obj = ResourceManager.GetObject("eye_open_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap filter_30 {
+            get {
+                object obj = ResourceManager.GetObject("filter_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -296,6 +346,26 @@ namespace geekStore.Properties {
         internal static System.Drawing.Bitmap password_30 {
             get {
                 object obj = ResourceManager.GetObject("password_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap products_100 {
+            get {
+                object obj = ResourceManager.GetObject("products_100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap products_box_100 {
+            get {
+                object obj = ResourceManager.GetObject("products_box_100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

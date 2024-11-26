@@ -42,7 +42,9 @@ namespace geekStore
             txtTelefone.Text = string.Empty;
             txtEmail.Text = string.Empty;
             txtSenha.Text = string.Empty;
+            txtSenha.Enabled = true;
             txtConfSenha.Text = string.Empty;
+            txtConfSenha.Enabled = true;
 
             btnCadastrar.Enabled = true;
 
@@ -53,6 +55,8 @@ namespace geekStore
         {
             if (txtNome.Text == string.Empty && txtEmail.Text == string.Empty && txtSenha.Text == string.Empty && txtConfSenha.Text == string.Empty)
             {
+                txtSenha.Enabled = true;
+                txtConfSenha.Enabled = true;
                 btnLimparCampos.Enabled = false;
             }
             else
@@ -333,10 +337,21 @@ namespace geekStore
                 txtCpf.Text = conCliente.cpf.ToString();
                 txtTelefone.Text = conCliente.telefone.ToString();
                 txtEmail.Text = conCliente.email.ToString();
-                txtSenha.Text = conCliente.senha.ToString();
 
-                btnEditar.Enabled = true;
-                btnExcluir.Enabled = true;
+                if (Lugar != "login")
+                {
+
+                    txtSenha.Text = conCliente.senha.ToString();
+                    btnEditar.Enabled = true;
+                    btnExcluir.Enabled = true;
+                }
+                else
+                {
+                    txtSenha.Enabled = false;
+                    txtConfSenha.Enabled = false;
+                    btnEditar.Enabled = false;
+                    btnExcluir.Enabled = false;
+                }
             }
             catch (Exception er)
             {
