@@ -15,7 +15,7 @@ namespace geekStore
 {
     public partial class frmLogin : Form
     {
-        public int idCliente = 0;
+        public static int idCliente { get; set; }
 
         public frmLogin(bool showSplash = true)
         {
@@ -90,15 +90,26 @@ namespace geekStore
                     MessageBox.Show("Senha incorreta!", "Senha", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtSenha.Focus();
                     txtSenha.SelectAll();
+                    return;
                 }
                 else
                 {
                     idCliente = conCliente.Id;
 
+                    MessageBox.Show(idCliente.ToString(), "idcli");
+
                     frmMenu menu = new frmMenu();
                     this.Hide();
                     menu.ShowDialog();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Usuário não cadastrado!", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtSenha.Text = string.Empty;
+                txtUsuario.SelectAll();
+                txtUsuario.Focus();
+                return;
             }
         }
 

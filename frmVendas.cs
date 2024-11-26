@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,14 +34,13 @@ namespace geekStore
             txtQuantidade.Text = string.Empty;
             txtQuantidade.Enabled = false;
             txtTotal.Text = string.Empty;
-            txtTotal.Enabled = false;
+            txtTotal.ReadOnly = true;
 
             btnInserir.Enabled = false;
             btnEditar.Enabled = false;
             btnExcluir.Enabled = false;
             btnLimparCampos.Enabled = false;
             btnVenda.Enabled = false;
-
 
             dgvVenda.Columns.Add("Id", "Id");
             dgvVenda.Columns.Add("Nome", "Nome");
@@ -106,6 +106,9 @@ namespace geekStore
                     btnLimparCampos.Enabled = true;
 
                     txtPreco.Text = dr["preco"].ToString();
+                    string imagem = cbxNome.Text.Replace(" ", "");
+                    string urlImg = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                    pbxImagem.Image = Image.FromFile(urlImg);
                     txtQuantidade.Focus();
                 }
                 dr.Close();
@@ -120,12 +123,22 @@ namespace geekStore
 
         private void dgvVenda_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = this.dgvVenda.Rows[e.RowIndex];
-            cbxNome.Text = row.Cells[1].Value.ToString();
-            txtPreco.Text = row.Cells[2].Value.ToString();
-            txtQuantidade.Text = row.Cells[3].Value.ToString();
-            txtQuantidade.SelectAll();
-            txtQuantidade.Focus();
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dgvVenda.Rows[e.RowIndex];
+                row.Selected = true;
+                cbxNome.Text = row.Cells[1].Value.ToString();
+                txtPreco.Text = row.Cells[2].Value.ToString();
+                txtQuantidade.Text = row.Cells[3].Value.ToString();
+                string imagem = cbxNome.Text.Replace(" ", "");
+                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                pbxImagem.Image = Image.FromFile(imgUrl);
+
+                btnExcluir.Enabled = true;
+
+                txtQuantidade.SelectAll();
+                txtQuantidade.Focus();
+            }
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
@@ -139,6 +152,8 @@ namespace geekStore
             txtPreco.Text = string.Empty;
             txtQuantidade.Text = string.Empty;
             txtTotal.Text = string.Empty;
+            pbxImagem.Image = null;
+            pbxImagem.Update();
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
@@ -187,6 +202,16 @@ namespace geekStore
                 dr.Close();
 
                 con.Close();
+
+                cbxNome.Text = string.Empty;
+                txtPreco.Text = string.Empty;
+                txtQuantidade.Text = string.Empty;
+                pbxImagem.Image = null;
+                pbxImagem.Update();
+
+                btnEditar.Enabled = false;
+                btnLimparCampos.Enabled = false;
+                btnEditar.Enabled = false;
             }
             catch (Exception er)
             {
@@ -305,6 +330,12 @@ namespace geekStore
 
         private void btnVenda_Click(object sender, EventArgs e)
         {
+            if (frmLogin.idCliente == 0)
+            {
+                MessageBox.Show("Cliente não identificado. Faça o login novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (con.State == ConnectionState.Open)
             {
                 con.Close();
@@ -315,8 +346,7 @@ namespace geekStore
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@total", SqlDbType.Decimal).Value = Convert.ToDecimal(txtTotal.Text.Trim());
             cmd.Parameters.AddWithValue("@dataVenda", SqlDbType.Date).Value = DateTime.Now.Date.ToString("MM/dd/yyyy");
-            frmLogin login = new frmLogin();
-            cmd.Parameters.AddWithValue("@idCliente", SqlDbType.Int).Value = login.idCliente;
+            cmd.Parameters.AddWithValue("@idCliente", SqlDbType.Int).Value = frmLogin.idCliente;
             cmd.ExecuteNonQuery();
 
             string sqlVenda = "SELECT IDENT_CURRENT('Vendas') AS idVenda";
@@ -334,6 +364,13 @@ namespace geekStore
                 cmd3.Parameters.AddWithValue("@valorUnitario", SqlDbType.Decimal).Value = Convert.ToDecimal(row.Cells[2]);
 
                 cmd3.ExecuteNonQuery();
+
+                ConProduto conProduto = new ConProduto();
+                int idDoProduto = Convert.ToInt32(row.Cells[0].Value);
+                conProduto.Localizar(idDoProduto);
+                int estoque = conProduto.quantidade;
+                int novoEstoque = estoque - Convert.ToInt32(row.Cells[3].Value);
+                conProduto.AtualizarEstoque(idDoProduto, novoEstoque);
             }
 
             dgvVenda.Rows.Clear();

@@ -205,5 +205,30 @@ namespace geekStore.Controller
             con.Close();
             return false;
         }
+
+        public void AtualizarEstoque(int Id, int quantidade)
+        {
+            try
+            {
+                decimal precoFinal = Convert.ToDecimal(preco);
+
+                string sql = $"UPDATE Produtos SET quantidade = '{quantidade}' WHERE Id = {Id}";
+
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
