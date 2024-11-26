@@ -133,6 +133,7 @@
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(271, 26);
             this.txtCpf.TabIndex = 18;
+            this.txtCpf.Click += new System.EventHandler(this.txtCpf_Click);
             this.txtCpf.TextChanged += new System.EventHandler(this.txtCpf_TextChanged);
             // 
             // txtTelefone
@@ -145,6 +146,7 @@
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(271, 26);
             this.txtTelefone.TabIndex = 19;
+            this.txtTelefone.Click += new System.EventHandler(this.txtTelefone_Click);
             this.txtTelefone.TextChanged += new System.EventHandler(this.txtTelefone_TextChanged);
             // 
             // txtSenha
@@ -245,6 +247,7 @@
             this.btnExcluir.TabIndex = 40;
             this.btnExcluir.Text = "      Excluir";
             this.btnExcluir.UseVisualStyleBackColor = false;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnEditar
             // 
@@ -290,6 +293,7 @@
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPesquisar.UseVisualStyleBackColor = false;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // btnCadastrar
             // 

@@ -243,7 +243,6 @@ namespace geekStore
                         MessageBox.Show("Produto inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         List<ModProduto> modProdutos = conProduto.ListaProdutos();
-
                         dgvProduto.DataSource = modProdutos;
 
                         LimpaCampos();
@@ -309,7 +308,9 @@ namespace geekStore
                 int idTipo = cbxTipo.SelectedIndex + 1;
 
                 ConProduto conProduto = new ConProduto();
+
                 int quantidade = Convert.ToInt32(txtQuantidade.Text);
+
                 conProduto.Atualizar(id, txtNome.Text, txtPreco.Text, quantidade, imgUrl, idTipo, imgNom);
 
                 List<ModProduto> modProduto = conProduto.ListaProdutos();
@@ -335,37 +336,41 @@ namespace geekStore
         {
             try
             {
-                if (pbxImagem.Image != null)
+                DialogResult res = MessageBox.Show("Realmente deseja excluir este produto?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (res == DialogResult.Yes)
                 {
-                    pbxImagem.Image.Dispose();
-                    pbxImagem.Image = null;
-                }
+                    if (pbxImagem.Image != null)
+                    {
+                        pbxImagem.Image.Dispose();
+                        pbxImagem.Image = null;
+                    }
 
-                int id = Convert.ToInt32(txtId.Text.Trim());
+                    int id = Convert.ToInt32(txtId.Text.Trim());
 
-                ConProduto conProduto = new ConProduto();
-                conProduto.Localizar(id);
+                    ConProduto conProduto = new ConProduto();
+                    conProduto.Localizar(id);
 
-                string nome = conProduto.nome;
-                string imagem = conProduto.foto;
-                string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
+                    string nome = conProduto.nome;
+                    string imagem = conProduto.foto;
+                    string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
 
-                System.IO.FileInfo fi = new System.IO.FileInfo(imgUrl);
-                fi.Delete();
+                    System.IO.FileInfo fi = new System.IO.FileInfo(imgUrl);
+                    fi.Delete();
 
-                conProduto.Excluir(id, nome);
+                    conProduto.Excluir(id, nome);
 
-                MessageBox.Show("Produto excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Produto excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                List<ModProduto> modProdutos = conProduto.ListaProdutos();
-                dgvProduto.DataSource = modProdutos;
+                    List<ModProduto> modProdutos = conProduto.ListaProdutos();
+                    dgvProduto.DataSource = modProdutos;
 
-                LimpaCampos();
-                btnInserir.Enabled = true;
-                btnEditar.Enabled = false;
-                btnExcluir.Enabled = false;
+                    LimpaCampos();
+                    btnInserir.Enabled = true;
+                    btnEditar.Enabled = false;
+                    btnExcluir.Enabled = false;
 
-                txtNome.Focus();
+                    txtNome.Focus();
+                }    
             }
             catch (Exception er)
             {

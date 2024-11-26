@@ -26,7 +26,8 @@ namespace geekStore.Controller
         {
             try
             {
-                DateTime dataRegistro = DateTime.Now.Date;
+                DateTime data = DateTime.Now.Date;
+                string dataRegistro = data.ToString("MM/dd/yyyy");
 
                 string sql = $"INSERT INTO Clientes (nome, cpf, email, telefone, dataRegistro, senha) VALUES ('{nome}', '{cpf}', '{email}', '{telefone}', '{dataRegistro}', '{senha}')";
 
@@ -93,11 +94,11 @@ namespace geekStore.Controller
             }
         }
 
-        public void LocalizarId(int id)
+        public bool LocalizarEmail(string oEmail)
         {
             try
             {
-                string sql = $"SELECT * FROM Clientes WHERE Id = '{id}'";
+                string sql = $"SELECT * FROM Clientes WHERE email = '{oEmail}'";
 
                 if (con.State == System.Data.ConnectionState.Open)
                 {
@@ -119,17 +120,19 @@ namespace geekStore.Controller
                     }
                     dr.Close();
                     con.Close();
+                    return true;
                 }
                 else
                 {
                     dr.Close();
                     con.Close();
-                    MessageBox.Show("Usuário não encontrado!", "Usuário", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
@@ -166,19 +169,19 @@ namespace geekStore.Controller
                 {
                     dr.Close();
                     con.Close();
-                    MessageBox.Show("Usuário não encontrado!", "Usuário", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
             catch (Exception er)
             {
                 MessageBox.Show(er.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
         public bool RegistroRepetido(string cpf, string email)
         {
-            string sql = $"SELECT * FROM Clientes WHERE cpf = '{cpf} OR email = '{email}'";
+            string sql = $"SELECT * FROM Clientes WHERE cpf = '{cpf}' OR email = '{email}'";
 
             if (con.State == System.Data.ConnectionState.Open)
             {

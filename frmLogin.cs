@@ -1,4 +1,5 @@
-﻿using geekStore.Properties;
+﻿using geekStore.Controller;
+using geekStore.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,7 +64,7 @@ namespace geekStore
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            frmCadCli cadCli = new frmCadCli();
+            frmCadCli cadCli = new frmCadCli("login");
             this.Hide();
             cadCli.ShowDialog();
             this.Show();
@@ -71,9 +72,23 @@ namespace geekStore
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            frmMenu menu = new frmMenu();
-            this.Hide();
-            menu.ShowDialog();
+            ConCliente conCliente = new ConCliente();
+            if (conCliente.LocalizarEmail(txtUsuario.Text))
+            {
+                string senha = conCliente.senha.ToString();
+                if (txtSenha.Text != senha)
+                {
+                    MessageBox.Show("Senha incorreta!", "Senha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSenha.Focus();
+                    txtSenha.SelectAll();
+                }
+                else
+                {
+                    frmMenu menu = new frmMenu();
+                    this.Hide();
+                    menu.ShowDialog();
+                }
+            }
         }
     }
 }

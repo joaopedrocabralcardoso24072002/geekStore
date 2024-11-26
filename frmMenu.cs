@@ -30,7 +30,7 @@ namespace geekStore
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCadCli cadCli = new frmCadCli();
+            frmCadCli cadCli = new frmCadCli("menu");
             this.Hide();
             cadCli.ShowDialog();
             this.Show();

@@ -14,9 +14,12 @@ namespace geekStore
 {
     public partial class frmCadCli : Form
     {
-        public frmCadCli()
+        private string Lugar;
+        public frmCadCli(string lugar)
         {
             InitializeComponent();
+
+            Lugar = lugar;
         }
 
         private void frmCadCli_Load(object sender, EventArgs e)
@@ -37,7 +40,10 @@ namespace geekStore
             txtNome.Text = string.Empty;
             txtCpf.Text = string.Empty;
             txtTelefone.Text = string.Empty;
+            txtEmail.Text = string.Empty;
             txtSenha.Text = string.Empty;
+            txtConfSenha.Text = string.Empty;
+
             btnCadastrar.Enabled = true;
 
             VerificaCampos();
@@ -45,25 +51,13 @@ namespace geekStore
 
         private void VerificaCampos()
         {
-            if (txtNome.Text == string.Empty && txtCpf.Text == string.Empty && txtTelefone.Text == string.Empty && txtEmail.Text == string.Empty && txtSenha.Text == string.Empty && txtConfSenha.Text == string.Empty)
+            if (txtNome.Text == string.Empty && txtEmail.Text == string.Empty && txtSenha.Text == string.Empty && txtConfSenha.Text == string.Empty)
             {
                 btnLimparCampos.Enabled = false;
             }
             else
             {
                 btnLimparCampos.Enabled = true;
-            }
-        }
-
-        private void txtEmail_Leave(object sender, EventArgs e)
-        {
-            string email = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-
-            if (!Regex.IsMatch(txtEmail.Text, email) && txtEmail.Text != string.Empty)
-            {
-                MessageBox.Show("Por favor, verifique o e-mail.", "E-mail inválido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtEmail.SelectAll();
-                txtEmail.Focus();
             }
         }
 
@@ -83,7 +77,7 @@ namespace geekStore
 
         private void txtCpf_TextChanged(object sender, EventArgs e)
         {
-            if (txtNome.Text == string.Empty && txtTelefone.Text == string.Empty && txtEmail.Text == string.Empty && txtSenha.Text == string.Empty && txtConfSenha.Text == string.Empty)
+            if (txtNome.Text == string.Empty && txtEmail.Text == string.Empty && txtSenha.Text == string.Empty && txtConfSenha.Text == string.Empty)
             {
                 btnPesquisar.Enabled = true;
             }
@@ -95,9 +89,31 @@ namespace geekStore
             VerificaCampos();
         }
 
+        private void txtCpf_Click(object sender, EventArgs e)
+        {
+            txtCpf.SelectionStart = 0;
+        }
+
         private void txtTelefone_TextChanged(object sender, EventArgs e)
         {
             VerificaCampos();
+        }
+
+        private void txtTelefone_Click(object sender, EventArgs e)
+        {
+            txtTelefone.SelectionStart = 0;
+        }
+
+        private void txtEmail_Leave(object sender, EventArgs e)
+        {
+            string email = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+            if (!Regex.IsMatch(txtEmail.Text, email) && txtEmail.Text != string.Empty)
+            {
+                MessageBox.Show("Por favor, verifique o e-mail.", "E-mail inválido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtEmail.SelectAll();
+                txtEmail.Focus();
+            }
         }
 
         private void txtEmail_TextChanged(object sender, EventArgs e)
@@ -141,11 +157,13 @@ namespace geekStore
             if (txtConfSenha.Text != txtSenha.Text && txtConfSenha.Text != string.Empty)
             {
                 txtConfSenha.BackColor = Color.Red;
+                pbxOlho2.BackColor = Color.Red;
                 btnCadastrar.Enabled = false;
             }
             else
             {
                 txtConfSenha.BackColor = Color.FromArgb(11, 11, 33);
+                pbxOlho2.BackColor = Color.FromArgb(11, 11, 33);
                 btnCadastrar.Enabled = true;
             }
 
@@ -202,40 +220,139 @@ namespace geekStore
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == string.Empty || txtCpf.Text == string.Empty || txtTelefone.Text == string.Empty || txtEmail.Text == string.Empty || txtSenha.Text == string.Empty || txtConfSenha.Text == string.Empty)
+            try
             {
-                MessageBox.Show($"Por favor, preencha todos os campos!", "Campo Obrigatório", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            else
-            {
-                ConCliente conCliente = new ConCliente();
-                string cpf = txtCpf.Text.Replace(",", "").Replace("-", "");
-                if (conCliente.RegistroRepetido(cpf, txtEmail.Text))
+                if (txtNome.Text == string.Empty || txtCpf.Text == string.Empty || txtTelefone.Text == string.Empty || txtEmail.Text == string.Empty || txtSenha.Text == string.Empty || txtConfSenha.Text == string.Empty)
                 {
-                    MessageBox.Show($"\"{txtNome.Text}\" já existe em nossa base de dados!", "Cliente repetido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtNome.Focus();
-                    txtNome.SelectAll();
+                    MessageBox.Show($"Por favor, preencha todos os campos!", "Campo Obrigatório", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
+                    ConCliente conCliente = new ConCliente();
+                    string cpf = txtCpf.Text.Replace(",", "").Replace("-", "");
+                    if (conCliente.RegistroRepetido(cpf, txtEmail.Text))
+                    {
+                        MessageBox.Show($"\"{txtNome.Text}\" já existe em nossa base de dados!", "Registro repetido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtNome.Focus();
+                        txtNome.SelectAll();
+                        return;
+                    }
+                    else
+                    {
 
-                    string telefone = txtTelefone.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+                        string telefone = txtTelefone.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
 
-                    conCliente.Inserir(txtNome.Text, cpf, txtEmail.Text, telefone, txtSenha.Text);
+                        conCliente.Inserir(txtNome.Text, cpf, txtEmail.Text, telefone, txtSenha.Text);
 
-                    MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    frmMenu menu = new frmMenu();
-                    this.Hide();
-                    menu.ShowDialog();
+                        if (Lugar != "menu")
+                        {
+                            frmMenu menu = new frmMenu();
+                            this.Hide();
+                            menu.ShowDialog();
+                        }
+
+                        LimpaCampos();
+
+                        txtNome.Focus();
+                    }
                 }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            if (txtConfSenha.Text != txtSenha.Text)
+            {
+                MessageBox.Show("Confirmar senha!", "Senha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtConfSenha.Focus();
+                return;
+            }
+            try
+            {
+                ConCliente conCliente = new ConCliente();
+
+                string cpf = txtCpf.Text.Replace(",", "").Replace("-", "");
+                if (conCliente.LocalizarCpf(cpf))
+                {
+                    int id = conCliente.Id;
+
+                    string telefone = txtTelefone.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+
+                    conCliente.Atualizar(id, txtNome.Text, cpf, txtEmail.Text, telefone, txtSenha.Text);
+
+                    MessageBox.Show("Cliente editado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LimpaCampos();
+
+                    btnCadastrar.Enabled = true;
+                    btnEditar.Enabled = false;
+                    btnExcluir.Enabled = false;
+
+                    txtNome.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Cliente não cadastrado!", "Cadastro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLimparCampos_Click(object sender, EventArgs e)
+        {
+            LimpaCampos();
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string cpf = txtCpf.Text.Replace(",", "").Replace("-", "");
+
+                ConCliente conCliente = new ConCliente();
+                bool find = conCliente.LocalizarCpf(cpf);
+                if (!find)
+                {
+                    MessageBox.Show("Registro não encontrado!", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCpf.Focus();
+                    txtCpf.SelectAll();
+                    return;
+                }
+
+                txtNome.Text = conCliente.nome.ToString();
+                txtCpf.Text = conCliente.cpf.ToString();
+                txtTelefone.Text = conCliente.telefone.ToString();
+                txtEmail.Text = conCliente.email.ToString();
+                txtSenha.Text = conCliente.senha.ToString();
+
+                btnEditar.Enabled = true;
+                btnExcluir.Enabled = true;
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (txtConfSenha.Text != txtSenha.Text)
+            {
+                MessageBox.Show("Confirmar senha!", "Senha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtConfSenha.Focus();
+                return;
+            }
+
             ConCliente conCliente = new ConCliente();
 
             string cpf = txtCpf.Text.Replace(",", "").Replace("-", "");
@@ -243,25 +360,25 @@ namespace geekStore
             {
                 int id = conCliente.Id;
 
-                string telefone = txtTelefone.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+                DialogResult res = MessageBox.Show("Realmente deseja excluir este registro?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (res == DialogResult.Yes)
+                {
+                    conCliente.Excluir(id);
 
-                conCliente.Atualizar(id, txtNome.Text, cpf, txtEmail.Text, telefone, txtSenha.Text);
+                    MessageBox.Show("Registro excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show("Cliente editado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpaCampos();
+                    btnCadastrar.Enabled = true;
+                    btnEditar.Enabled = false;
+                    btnExcluir.Enabled = false;
 
-                LimpaCampos();
-
-                txtNome.Focus();
+                    txtNome.Focus();
+                }
             }
             else
             {
                 MessageBox.Show("Cliente não cadastrado!", "Cadastro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void btnLimparCampos_Click(object sender, EventArgs e)
-        {
-            LimpaCampos();
         }
     }
 }
