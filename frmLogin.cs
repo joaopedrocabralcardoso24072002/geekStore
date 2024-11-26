@@ -15,6 +15,8 @@ namespace geekStore
 {
     public partial class frmLogin : Form
     {
+        public int idCliente = 0;
+
         public frmLogin(bool showSplash = true)
         {
             InitializeComponent();
@@ -91,6 +93,8 @@ namespace geekStore
                 }
                 else
                 {
+                    idCliente = conCliente.Id;
+
                     frmMenu menu = new frmMenu();
                     this.Hide();
                     menu.ShowDialog();

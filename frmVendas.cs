@@ -305,7 +305,51 @@ namespace geekStore
 
         private void btnVenda_Click(object sender, EventArgs e)
         {
-            
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("InserirVenda", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@total", SqlDbType.Decimal).Value = Convert.ToDecimal(txtTotal.Text.Trim());
+            cmd.Parameters.AddWithValue("@dataVenda", SqlDbType.Date).Value = DateTime.Now.Date.ToString("MM/dd/yyyy");
+            frmLogin login = new frmLogin();
+            cmd.Parameters.AddWithValue("@idCliente", SqlDbType.Int).Value = login.idCliente;
+            cmd.ExecuteNonQuery();
+
+            string sqlVenda = "SELECT IDENT_CURRENT('Vendas') AS idVenda";
+            SqlCommand cmd2 = new SqlCommand(sqlVenda, con);
+            int idVenda = Convert.ToInt32(cmd2.ExecuteScalar());
+
+            foreach (DataGridViewRow row in dgvVenda.Rows)
+            {
+                SqlCommand cmd3 = new SqlCommand("InserirItensVendidos", con);
+                cmd3.CommandType = CommandType.StoredProcedure;
+
+                cmd3.Parameters.AddWithValue("@idProduto", SqlDbType.Int).Value = Convert.ToInt32(row.Cells[0].Value);
+                cmd3.Parameters.AddWithValue("@idVenda", SqlDbType.Int).Value = idVenda;
+                cmd3.Parameters.AddWithValue("@quantidade", SqlDbType.Int).Value = Convert.ToInt32(row.Cells[3].Value);
+                cmd3.Parameters.AddWithValue("@valorUnitario", SqlDbType.Decimal).Value = Convert.ToDecimal(row.Cells[2]);
+
+                cmd3.ExecuteNonQuery();
+            }
+
+            dgvVenda.Rows.Clear();
+            dgvVenda.Refresh();
+
+            cbxNome.Text = string.Empty;
+            txtPreco.Text = string.Empty;
+            txtQuantidade.Text = string.Empty;
+            txtTotal.Text = string.Empty;
+
+            btnVenda.Enabled = false;
+            btnEditar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnLimparCampos.Enabled = false;
+
+            MessageBox.Show("Venda realizada com sucesso!", "Venda", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
