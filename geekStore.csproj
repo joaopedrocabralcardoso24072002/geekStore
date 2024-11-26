@@ -125,6 +125,9 @@
     <EmbeddedResource Include="frmCadProd.resx">
       <DependentUpon>frmCadProd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDemonstrativo.resx">
+      <DependentUpon>frmDemonstrativo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
