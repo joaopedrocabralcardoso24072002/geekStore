@@ -400,6 +400,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCadCli";
             this.Load += new System.EventHandler(this.frmCadCli_Load);
+            this.Shown += new System.EventHandler(this.frmCadCli_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbxOlho2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOlho)).EndInit();
             this.ResumeLayout(false);

@@ -27,7 +27,7 @@ namespace geekStore.Controller
             try
             {
                 DateTime data = DateTime.Now.Date;
-                string dataRegistro = data.ToString("MM/dd/yyyy");
+                string dataRegistro = data.ToString("yyyy/MM/dd");
 
                 string sql = $"INSERT INTO Clientes (nome, cpf, email, telefone, dataRegistro, senha) VALUES ('{nome}', '{cpf}', '{email}', '{telefone}', '{dataRegistro}', '{senha}')";
 

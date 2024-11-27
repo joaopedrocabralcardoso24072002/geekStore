@@ -14,7 +14,8 @@ namespace geekStore
 {
     public partial class frmCadCli : Form
     {
-        private string Lugar;
+        private readonly string Lugar;
+
         public frmCadCli(string lugar)
         {
             InitializeComponent();
@@ -23,6 +24,19 @@ namespace geekStore
         }
 
         private void frmCadCli_Load(object sender, EventArgs e)
+        {
+            txtCpf.Mask = "000.000.000-00";
+            txtTelefone.Mask = "(00) 0 0000-0000";
+
+            btnEditar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnPesquisar.Enabled = false;
+            btnLimparCampos.Enabled = false;
+
+            txtNome.Focus();
+        }
+
+        private void frmCadCli_Shown(object sender, EventArgs e)
         {
             txtCpf.Mask = "000.000.000-00";
             txtTelefone.Mask = "(00) 0 0000-0000";
@@ -237,9 +251,10 @@ namespace geekStore
                     string cpf = txtCpf.Text.Replace(",", "").Replace("-", "");
                     if (conCliente.RegistroRepetido(cpf, txtEmail.Text))
                     {
-                        MessageBox.Show($"\"{txtNome.Text}\" já existe em nossa base de dados!", "Registro repetido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtNome.Focus();
-                        txtNome.SelectAll();
+                        MessageBox.Show($"\"{txtNome.Text}\" já existe em nossa base de dados! \n E-mail e/ou CPF repetidos.", "Registro repetido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtCpf.Focus();
+                        txtCpf.SelectAll();
+                        txtEmail.Text = string.Empty;
                         return;
                     }
                     else
@@ -251,11 +266,9 @@ namespace geekStore
 
                         MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        if (Lugar != "menu")
+                        if (Lugar == "login")
                         {
-                            frmMenu menu = new frmMenu();
-                            this.Hide();
-                            menu.ShowDialog();
+                            this.Close();
                         }
 
                         LimpaCampos();
@@ -388,6 +401,12 @@ namespace geekStore
                     btnExcluir.Enabled = false;
 
                     txtNome.Focus();
+
+                    pbxOlho.Image = Properties.Resources.closed_eye_24;
+                    pbxOlho2.Image = Properties.Resources.closed_eye_24;
+                    pbxOlho.Tag = "eye_closed";
+                    pbxOlho2.Tag = "eye_closed";
+                    txtSenha.PasswordChar = '*';
                 }
             }
             else

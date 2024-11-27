@@ -42,6 +42,9 @@ namespace geekStore
             btnLimparCampos.Enabled = false;
             btnVenda.Enabled = false;
 
+            pbxImagem.Image = null;
+            pbxImagem.Update();
+
             dgvVenda.Columns.Add("Id", "Id");
             dgvVenda.Columns.Add("Nome", "Nome");
             dgvVenda.Columns.Add("Preco", "Preço");
@@ -186,7 +189,7 @@ namespace geekStore
                 con.Open();
 
                 SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@id", cbxNome.SelectedValue);
+                cmd.Parameters.AddWithValue("@id", cbxNome.SelectedIndex);
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
@@ -199,19 +202,14 @@ namespace geekStore
                         return;
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Produto não encontrado!", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 dr.Close();
 
                 con.Close();
-
-                cbxNome.Text = string.Empty;
-                txtPreco.Text = string.Empty;
-                txtQuantidade.Text = string.Empty;
-                pbxImagem.Image = null;
-                pbxImagem.Update();
-
-                btnEditar.Enabled = false;
-                btnLimparCampos.Enabled = false;
-                btnEditar.Enabled = false;
             }
             catch (Exception er)
             {
@@ -233,13 +231,18 @@ namespace geekStore
             item.Cells[1].Value = cbxNome.Text;
             item.Cells[2].Value = txtPreco.Text;
             item.Cells[3].Value = txtQuantidade.Text;
-            item.Cells[4].Value = Convert.ToDecimal(txtQuantidade.Text) * Convert.ToDecimal(txtPreco.Text);
+            item.Cells[4].Value = Convert.ToDecimal(txtQuantidade.Text.Trim()) * Convert.ToDecimal(txtPreco.Text.Trim());
             dgvVenda.Rows.Add(item);
 
             cbxNome.Text = string.Empty;
             txtPreco.Text = string.Empty;
             txtQuantidade.Text = string.Empty;
+            pbxImagem.Image = null;
+            pbxImagem.Update();
 
+            btnEditar.Enabled = false;
+            btnLimparCampos.Enabled = false;
+            btnEditar.Enabled = false;
             btnVenda.Enabled = true;
 
             decimal soma = 0;
@@ -345,7 +348,7 @@ namespace geekStore
             SqlCommand cmd = new SqlCommand("InserirVenda", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@total", SqlDbType.Decimal).Value = Convert.ToDecimal(txtTotal.Text.Trim());
-            cmd.Parameters.AddWithValue("@dataVenda", SqlDbType.Date).Value = DateTime.Now.Date.ToString("MM/dd/yyyy");
+            cmd.Parameters.AddWithValue("@dataVenda", SqlDbType.Date).Value = DateTime.Now.Date.ToString("yyyy/MM/dd");
             cmd.Parameters.AddWithValue("@idCliente", SqlDbType.Int).Value = frmLogin.idCliente;
             cmd.ExecuteNonQuery();
 

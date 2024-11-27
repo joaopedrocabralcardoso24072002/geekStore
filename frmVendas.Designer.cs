@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dgvVenda = new System.Windows.Forms.DataGridView();
             this.txtQuantidade = new System.Windows.Forms.TextBox();
             this.lblQuantidade = new System.Windows.Forms.Label();
             this.txtPreco = new System.Windows.Forms.TextBox();
@@ -48,59 +48,10 @@
             this.cbxNome = new System.Windows.Forms.ComboBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVenda)).BeginInit();
+            this.dgvVenda = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVenda)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvVenda
-            // 
-            this.dgvVenda.AllowUserToAddRows = false;
-            this.dgvVenda.AllowUserToDeleteRows = false;
-            this.dgvVenda.AllowUserToResizeColumns = false;
-            this.dgvVenda.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            this.dgvVenda.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvVenda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvVenda.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            this.dgvVenda.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvVenda.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVenda.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvVenda.EnableHeadersVisualStyles = false;
-            this.dgvVenda.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvVenda.Location = new System.Drawing.Point(15, 276);
-            this.dgvVenda.Name = "dgvVenda";
-            this.dgvVenda.ReadOnly = true;
-            this.dgvVenda.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVenda.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvVenda.RowHeadersVisible = false;
-            this.dgvVenda.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvVenda.Size = new System.Drawing.Size(570, 178);
-            this.dgvVenda.StandardTab = true;
-            this.dgvVenda.TabIndex = 59;
-            this.dgvVenda.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVenda_CellClick);
             // 
             // txtQuantidade
             // 
@@ -353,16 +304,84 @@
             this.label1.Text = "Total (R$)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // dgvVenda
+            // 
+            this.dgvVenda.AllowUserToAddRows = false;
+            this.dgvVenda.AllowUserToDeleteRows = false;
+            this.dgvVenda.AllowUserToResizeColumns = false;
+            this.dgvVenda.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            this.dgvVenda.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvVenda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVenda.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            this.dgvVenda.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvVenda.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVenda.ColumnHeadersVisible = false;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVenda.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvVenda.EnableHeadersVisualStyles = false;
+            this.dgvVenda.GridColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvVenda.Location = new System.Drawing.Point(15, 276);
+            this.dgvVenda.Margin = new System.Windows.Forms.Padding(12);
+            this.dgvVenda.Name = "dgvVenda";
+            this.dgvVenda.ReadOnly = true;
+            this.dgvVenda.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVenda.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvVenda.RowHeadersVisible = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVenda.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvVenda.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvVenda.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
+            this.dgvVenda.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvVenda.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvVenda.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(40)))), ((int)(((byte)(255)))));
+            this.dgvVenda.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvVenda.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVenda.RowTemplate.Height = 30;
+            this.dgvVenda.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVenda.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvVenda.Size = new System.Drawing.Size(570, 169);
+            this.dgvVenda.StandardTab = true;
+            this.dgvVenda.TabIndex = 64;
+            this.dgvVenda.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVenda_CellClick);
+            // 
             // frmVendas
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(600, 466);
+            this.Controls.Add(this.dgvVenda);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbxNome);
             this.Controls.Add(this.btnVenda);
-            this.Controls.Add(this.dgvVenda);
             this.Controls.Add(this.btnLimparCampos);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnEditar);
@@ -382,16 +401,14 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmVendas";
             this.Shown += new System.EventHandler(this.frmVendas_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVenda)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVenda)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvVenda;
         private System.Windows.Forms.Button btnLimparCampos;
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnEditar;
@@ -407,5 +424,6 @@
         private System.Windows.Forms.ComboBox cbxNome;
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvVenda;
     }
 }
