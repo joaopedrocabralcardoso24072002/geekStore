@@ -19,6 +19,9 @@ namespace geekStore
     {
         private readonly SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbGeekStore"].ConnectionString);
 
+        public static int idCliente {  get; set; }
+        private static int idProduto { get; set; }
+
         public frmVendas()
         {
             InitializeComponent();
@@ -29,6 +32,7 @@ namespace geekStore
             CarregaCbxProduto();
 
             cbxNome.Text = string.Empty;
+            cbxNome.Enabled = true;
             txtPreco.Text = string.Empty;
             txtPreco.Enabled = false;
             txtQuantidade.Text = string.Empty;
@@ -104,7 +108,7 @@ namespace geekStore
                 {
                     txtQuantidade.Enabled = true;
                     btnInserir.Enabled = true;
-                    btnEditar.Enabled = true;
+                    btnEditar.Enabled = false;
                     // btnExcluir.Enabled = true;
                     btnLimparCampos.Enabled = true;
 
@@ -137,7 +141,13 @@ namespace geekStore
                 string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
                 pbxImagem.Image = Image.FromFile(imgUrl);
 
+                idProduto = (int)row.Cells[0].Value;
+
+                btnInserir.Enabled = false;
+                btnEditar.Enabled = true;
                 btnExcluir.Enabled = true;
+
+                cbxNome.Enabled = false;
 
                 txtQuantidade.SelectAll();
                 txtQuantidade.Focus();
@@ -152,16 +162,30 @@ namespace geekStore
         private void btnLimparCampos_Click(object sender, EventArgs e)
         {
             cbxNome.Text = string.Empty;
+            cbxNome.Enabled = true;
             txtPreco.Text = string.Empty;
             txtQuantidade.Text = string.Empty;
             txtTotal.Text = string.Empty;
             pbxImagem.Image = null;
             pbxImagem.Update();
+
+            btnEditar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnLimparCampos.Enabled = false;
+            if (dgvVenda.Rows.Count < 1)
+            {
+                btnVenda.Enabled = false;
+            }
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            if (txtQuantidade.Text == string.Empty)
+            if (cbxNome.Text == string.Empty || txtPreco.Text == string.Empty)
+            {
+                MessageBox.Show("Preencha todos os campos!", "Campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (txtQuantidade.Text == string.Empty)
             {
                 MessageBox.Show("Digite a quantidade do produto!", "Quantidade", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtQuantidade.Focus();
@@ -189,7 +213,7 @@ namespace geekStore
                 con.Open();
 
                 SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@id", cbxNome.SelectedIndex);
+                cmd.Parameters.AddWithValue("@id", cbxNome.SelectedValue);
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
@@ -235,6 +259,7 @@ namespace geekStore
             dgvVenda.Rows.Add(item);
 
             cbxNome.Text = string.Empty;
+            cbxNome.Enabled = true;
             txtPreco.Text = string.Empty;
             txtQuantidade.Text = string.Empty;
             pbxImagem.Image = null;
@@ -255,59 +280,72 @@ namespace geekStore
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT * FROM Produtos WHERE Id = @id";
-
-            if (con.State == ConnectionState.Open)
+            if (cbxNome.Text == string.Empty || txtPreco.Text == string.Empty)
             {
-                con.Close();
+                MessageBox.Show("Preencha todos os campos!", "Campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@Id", cbxNome.SelectedValue);
-
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
+            try
             {
-                if (Convert.ToInt32(txtQuantidade.Text.Trim()) > Convert.ToInt32(dr[2]))
+                string sql = "SELECT * FROM Produtos WHERE Id = @id";
+
+                if (con.State == ConnectionState.Open)
                 {
-                    MessageBox.Show("Quantidade indisponível em estoque! \nDigite um valor menor.", "Quantidade", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtQuantidade.Focus();
-                    txtQuantidade.SelectAll();
-                    return;
+                    con.Close();
                 }
-                else if (txtQuantidade.Text == "0")
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", cbxNome.SelectedValue);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
                 {
-                    DialogResult res = MessageBox.Show("A quantidade foi definida como '0'. Deseja continuar?", "Quantidade", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                    if (res != DialogResult.Yes)
+                    if (Convert.ToInt32(txtQuantidade.Text.Trim()) > Convert.ToInt32(dr[3]))
                     {
+                        MessageBox.Show("Quantidade indisponível em estoque! \nDigite um valor menor.", "Quantidade", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         txtQuantidade.Focus();
                         txtQuantidade.SelectAll();
                         return;
                     }
+                    else if (txtQuantidade.Text == "0")
+                    {
+                        DialogResult res = MessageBox.Show("A quantidade foi definida como '0'. Deseja continuar?", "Quantidade", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        if (res != DialogResult.Yes)
+                        {
+                            txtQuantidade.Focus();
+                            txtQuantidade.SelectAll();
+                            return;
+                        }
+                    }
                 }
+                dr.Close();
+
+                con.Close();
+
+                int row = dgvVenda.CurrentRow.Index;
+                dgvVenda.Rows[row].Cells[0].Value = cbxNome.SelectedValue;
+                dgvVenda.Rows[row].Cells[1].Value = cbxNome.Text;
+                dgvVenda.Rows[row].Cells[2].Value = txtPreco.Text;
+                dgvVenda.Rows[row].Cells[3].Value = txtQuantidade.Text;
+                dgvVenda.Rows[row].Cells[4].Value = Convert.ToDecimal(txtQuantidade.Text.Trim()) * Convert.ToDecimal(txtPreco.Text.Trim());
+
+                cbxNome.Text = string.Empty;
+                cbxNome.Enabled = true;
+                txtPreco.Text = string.Empty;
+                txtQuantidade.Text = string.Empty;
+
+                decimal soma = 0;
+                foreach (DataGridViewRow dgvr in dgvVenda.Rows)
+                {
+                    soma += Convert.ToDecimal(dgvr.Cells[4].Value);
+                }
+                txtTotal.Text = soma.ToString();
             }
-            dr.Close();
-
-            con.Close();
-
-            int row = dgvVenda.CurrentRow.Index;
-            dgvVenda.Rows[row].Cells[0].Value = cbxNome.SelectedValue;
-            dgvVenda.Rows[row].Cells[1].Value = cbxNome.Text;
-            dgvVenda.Rows[row].Cells[2].Value = txtPreco.Text;
-            dgvVenda.Rows[row].Cells[3].Value = txtQuantidade.Text;
-            dgvVenda.Rows[row].Cells[4].Value = Convert.ToDecimal(txtQuantidade.Text.Trim()) * Convert.ToDecimal(txtPreco.Text.Trim());
-
-            cbxNome.Text = string.Empty;
-            txtPreco.Text = string.Empty;
-            txtQuantidade.Text = string.Empty;
-
-            decimal soma = 0;
-            foreach (DataGridViewRow dgvr in dgvVenda.Rows)
+            catch (Exception er)
             {
-                soma += Convert.ToDecimal(dgvr.Cells[4].Value);
+                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            txtTotal.Text = soma.ToString();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
@@ -316,12 +354,20 @@ namespace geekStore
             dgvVenda.Rows.RemoveAt(row);
 
             cbxNome.Text = string.Empty;
+            cbxNome.Enabled = true;
             txtPreco.Text = string.Empty;
             txtQuantidade.Text = string.Empty;
+            pbxImagem.Image = null;
+            pbxImagem.Update();
 
             btnEditar.Enabled = false;
             btnExcluir.Enabled = false;
             btnLimparCampos.Enabled = false;
+            if (dgvVenda.Rows.Count < 1)
+            {
+                btnVenda.Enabled = false;
+                txtTotal.Text = string.Empty;
+            }
 
             decimal soma = 0;
             foreach (DataGridViewRow dataGridViewRow in dgvVenda.Rows)
@@ -333,7 +379,7 @@ namespace geekStore
 
         private void btnVenda_Click(object sender, EventArgs e)
         {
-            if (frmLogin.idCliente == 0)
+            if (idCliente == 0)
             {
                 MessageBox.Show("Cliente não identificado. Faça o login novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -349,7 +395,7 @@ namespace geekStore
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@total", SqlDbType.Decimal).Value = Convert.ToDecimal(txtTotal.Text.Trim());
             cmd.Parameters.AddWithValue("@dataVenda", SqlDbType.Date).Value = DateTime.Now.Date.ToString("yyyy/MM/dd");
-            cmd.Parameters.AddWithValue("@idCliente", SqlDbType.Int).Value = frmLogin.idCliente;
+            cmd.Parameters.AddWithValue("@idCliente", SqlDbType.Int).Value = idCliente;
             cmd.ExecuteNonQuery();
 
             string sqlVenda = "SELECT IDENT_CURRENT('Vendas') AS idVenda";
@@ -364,7 +410,7 @@ namespace geekStore
                 cmd3.Parameters.AddWithValue("@idProduto", SqlDbType.Int).Value = Convert.ToInt32(row.Cells[0].Value);
                 cmd3.Parameters.AddWithValue("@idVenda", SqlDbType.Int).Value = idVenda;
                 cmd3.Parameters.AddWithValue("@quantidade", SqlDbType.Int).Value = Convert.ToInt32(row.Cells[3].Value);
-                cmd3.Parameters.AddWithValue("@valorUnitario", SqlDbType.Decimal).Value = Convert.ToDecimal(row.Cells[2]);
+                cmd3.Parameters.AddWithValue("@valorUnitario", SqlDbType.Decimal).Value = Convert.ToDecimal(row.Cells[2].Value);
 
                 cmd3.ExecuteNonQuery();
 
@@ -380,9 +426,12 @@ namespace geekStore
             dgvVenda.Refresh();
 
             cbxNome.Text = string.Empty;
+            cbxNome.Enabled = true;
             txtPreco.Text = string.Empty;
             txtQuantidade.Text = string.Empty;
             txtTotal.Text = string.Empty;
+            pbxImagem.Image = null;
+            pbxImagem.Update();
 
             btnVenda.Enabled = false;
             btnEditar.Enabled = false;

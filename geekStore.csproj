@@ -121,6 +121,9 @@
     <Compile Include="frmVendas.Designer.cs">
       <DependentUpon>frmVendas.cs</DependentUpon>
     </Compile>
+    <Compile Include="GradientLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Models\ModCliente.cs" />
     <Compile Include="Models\ModProduto.cs" />
     <Compile Include="Program.cs" />
@@ -133,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDemonstrativo.resx">
       <DependentUpon>frmDemonstrativo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEsqSenha.resx">
+      <DependentUpon>frmEsqSenha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

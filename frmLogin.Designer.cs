@@ -180,6 +180,7 @@
             this.lnkEsqSenha.Text = "Esqueci a senha";
             this.lnkEsqSenha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lnkEsqSenha.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
+            this.lnkEsqSenha.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEsqSenha_LinkClicked);
             // 
             // lblSenha
             // 

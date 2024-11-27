@@ -15,8 +15,6 @@ namespace geekStore
 {
     public partial class frmLogin : Form
     {
-        public static int idCliente { get; set; }
-
         public frmLogin(bool showSplash = true)
         {
             InitializeComponent();
@@ -94,9 +92,7 @@ namespace geekStore
                 }
                 else
                 {
-                    idCliente = conCliente.Id;
-
-                    MessageBox.Show(idCliente.ToString(), "idcli");
+                    frmVendas.idCliente = conCliente.Id;
 
                     frmMenu menu = new frmMenu();
                     this.Hide();
@@ -116,6 +112,14 @@ namespace geekStore
         private void frmLogin_Load(object sender, EventArgs e)
         {
             txtUsuario.Focus();
+        }
+
+        private void lnkEsqSenha_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmEsqSenha esqSenha = new frmEsqSenha();
+            this.Hide();
+            esqSenha.ShowDialog();
+            this.Show();
         }
     }
 }

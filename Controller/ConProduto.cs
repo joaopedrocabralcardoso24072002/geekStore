@@ -139,11 +139,11 @@ namespace geekStore.Controller
             }
         }
 
-        public bool Localizar(int Id)
+        public bool Localizar(int id)
         {
             try
             {
-                string sql = $"SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo FROM Produtos p JOIN Tipos t ON p.idTipo = t.Id WHERE p.Id = {Id}";
+                string sql = $"SELECT p.Id, p.nome, p.preco, p.quantidade, p.foto, t.nome AS tipo FROM Produtos p JOIN Tipos t ON p.idTipo = t.Id WHERE p.Id = {id}";
 
                 if (con.State == ConnectionState.Open)
                 {
@@ -157,6 +157,7 @@ namespace geekStore.Controller
                 {
                     while (dr.Read())
                     {
+                        Id = (int)(dr["Id"]);
                         nome = dr["nome"].ToString();
                         preco = (decimal)dr["preco"];
                         quantidade = (int)dr["quantidade"];

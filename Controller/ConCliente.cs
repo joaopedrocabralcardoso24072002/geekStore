@@ -112,6 +112,7 @@ namespace geekStore.Controller
                 {
                     while (dr.Read())
                     {
+                        Id = (int)dr["Id"];
                         nome = dr["nome"].ToString();
                         cpf = dr["cpf"].ToString();
                         email = dr["email"].ToString();
