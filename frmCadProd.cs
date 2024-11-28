@@ -63,6 +63,8 @@ namespace geekStore
             cbxTipo.Text = string.Empty;
             pbxImagem.Image = null;
             pbxImagem.Update();
+            pbxImagem.Dispose();
+
             btnInserir.Enabled = true;
 
             VerificaCampos();
@@ -240,12 +242,12 @@ namespace geekStore
 
                         conProduto.Inserir(txtNome.Text, txtPreco.Text, quantidade, imagem, idTipo);
 
-                        MessageBox.Show("Produto inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         List<ModProduto> modProdutos = conProduto.ListaProdutos();
                         dgvProduto.DataSource = modProdutos;
 
                         LimpaCampos();
+
+                        MessageBox.Show("Produto inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         txtNome.Focus();
                     }
@@ -298,12 +300,12 @@ namespace geekStore
 
                 string imagem = txtNome.Text.Replace(" ", "");
                 string imgUrl = Path.Combine(Config.ProdutosFolderPath, $"{imagem}.jpg");
-                pbxImagem.Image.Save(imgUrl);
-                if (pbxImagem.Image != null)
+                if (!File.Exists(imgUrl))
                 {
-                    pbxImagem.Image.Dispose();
-                    pbxImagem.Image = null;
+                    pbxImagem.Image.Save(imgUrl);
                 }
+                pbxImagem.Dispose();
+                pbxImagem.Image = null;
 
                 int idTipo = cbxTipo.SelectedIndex + 1;
 

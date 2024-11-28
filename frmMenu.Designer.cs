@@ -38,9 +38,9 @@
             this.produtosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.demonstrativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chtMenu = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblClientes = new System.Windows.Forms.Label();
             this.lblProdutos = new System.Windows.Forms.Label();
             this.lblVendas = new System.Windows.Forms.Label();
@@ -55,10 +55,8 @@
             this.pbxDemonstrativo = new System.Windows.Forms.PictureBox();
             this.pbxClientes = new System.Windows.Forms.PictureBox();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.txtTotal = new System.Windows.Forms.TextBox();
-            this.lblPreço = new System.Windows.Forms.Label();
             this.strMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSobre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxProdutos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxVendas)).BeginInit();
@@ -128,15 +126,6 @@
             this.demonstrativoToolStripMenuItem.Text = "Demonstrativo";
             this.demonstrativoToolStripMenuItem.Click += new System.EventHandler(this.demonstrativoToolStripMenuItem_Click);
             // 
-            // sobreToolStripMenuItem
-            // 
-            this.sobreToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.sobreToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(68, 32);
-            this.sobreToolStripMenuItem.Text = "Sobre";
-            this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
-            // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -147,26 +136,36 @@
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // chart1
+            // sobreToolStripMenuItem
             // 
-            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chart1.BackColor = System.Drawing.Color.Transparent;
-            this.chart1.BorderlineColor = System.Drawing.Color.WhiteSmoke;
-            this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            this.chart1.BorderSkin.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chart1.BorderSkin.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.chart1.BorderSkin.BorderWidth = 2;
-            this.chart1.BorderSkin.PageColor = System.Drawing.Color.Transparent;
+            this.sobreToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.sobreToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(68, 32);
+            this.sobreToolStripMenuItem.Text = "Sobre";
+            this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
+            // 
+            // chtMenu
+            // 
+            this.chtMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chtMenu.BackColor = System.Drawing.Color.Transparent;
+            this.chtMenu.BorderlineColor = System.Drawing.Color.WhiteSmoke;
+            this.chtMenu.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            this.chtMenu.BorderSkin.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chtMenu.BorderSkin.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.chtMenu.BorderSkin.BorderWidth = 2;
+            this.chtMenu.BorderSkin.PageColor = System.Drawing.Color.Transparent;
             chartArea1.Area3DStyle.Enable3D = true;
             chartArea1.Area3DStyle.Inclination = 20;
             chartArea1.Area3DStyle.Rotation = 20;
             chartArea1.Area3DStyle.WallWidth = 5;
             chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.AxisX.LineColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.AxisX.LineWidth = 2;
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.DimGray;
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.AxisX.TitleForeColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.AxisX2.LineColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.AxisY.IsLabelAutoFit = false;
@@ -174,29 +173,32 @@
             chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.AxisY.LineColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.AxisY.LineWidth = 2;
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.DimGray;
             chartArea1.AxisY2.LineColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.BorderColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            this.chtMenu.ChartAreas.Add(chartArea1);
+            this.chtMenu.Enabled = false;
             legend1.BackColor = System.Drawing.Color.Transparent;
             legend1.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             legend1.ForeColor = System.Drawing.Color.WhiteSmoke;
             legend1.IsTextAutoFit = false;
             legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(273, 319);
-            this.chart1.Margin = new System.Windows.Forms.Padding(15, 20, 18, 20);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
+            this.chtMenu.Legends.Add(legend1);
+            this.chtMenu.Location = new System.Drawing.Point(273, 319);
+            this.chtMenu.Margin = new System.Windows.Forms.Padding(15, 20, 18, 20);
+            this.chtMenu.Name = "chtMenu";
+            this.chtMenu.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
             series1.ChartArea = "ChartArea1";
+            series1.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.LabelForeColor = System.Drawing.Color.WhiteSmoke;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(600, 300);
-            this.chart1.TabIndex = 12;
-            this.chart1.Text = "chtMenu";
+            series1.Name = "Nome";
+            this.chtMenu.Series.Add(series1);
+            this.chtMenu.Size = new System.Drawing.Size(600, 300);
+            this.chtMenu.TabIndex = 12;
+            this.chtMenu.Text = "chtMenu";
             // 
             // lblClientes
             // 
@@ -208,7 +210,7 @@
             this.lblClientes.Size = new System.Drawing.Size(75, 28);
             this.lblClientes.TabIndex = 13;
             this.lblClientes.Text = "Clientes";
-            this.lblClientes.Click += new System.EventHandler(this.lblClientes_Click);
+            this.lblClientes.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // lblProdutos
             // 
@@ -219,7 +221,7 @@
             this.lblProdutos.Size = new System.Drawing.Size(85, 28);
             this.lblProdutos.TabIndex = 14;
             this.lblProdutos.Text = "Produtos";
-            this.lblProdutos.Click += new System.EventHandler(this.lblProdutos_Click);
+            this.lblProdutos.Click += new System.EventHandler(this.produtosToolStripMenuItem_Click);
             // 
             // lblVendas
             // 
@@ -230,7 +232,7 @@
             this.lblVendas.Size = new System.Drawing.Size(69, 28);
             this.lblVendas.TabIndex = 15;
             this.lblVendas.Text = "Vendas";
-            this.lblVendas.Click += new System.EventHandler(this.lblVendas_Click);
+            this.lblVendas.Click += new System.EventHandler(this.vendasToolStripMenuItem_Click);
             // 
             // lblDemonstrativo
             // 
@@ -241,7 +243,7 @@
             this.lblDemonstrativo.Size = new System.Drawing.Size(132, 28);
             this.lblDemonstrativo.TabIndex = 16;
             this.lblDemonstrativo.Text = "Demonstrativo";
-            this.lblDemonstrativo.Click += new System.EventHandler(this.lblDemonstrativo_Click);
+            this.lblDemonstrativo.Click += new System.EventHandler(this.demonstrativoToolStripMenuItem_Click);
             // 
             // lblSobre
             // 
@@ -252,7 +254,7 @@
             this.lblSobre.Size = new System.Drawing.Size(56, 28);
             this.lblSobre.TabIndex = 17;
             this.lblSobre.Text = "Sobre";
-            this.lblSobre.Click += new System.EventHandler(this.lblSobre_Click);
+            this.lblSobre.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
             // cbxTipo
             // 
@@ -318,7 +320,7 @@
             this.pbxSobre.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxSobre.TabIndex = 11;
             this.pbxSobre.TabStop = false;
-            this.pbxSobre.Click += new System.EventHandler(this.pbxSobre_Click);
+            this.pbxSobre.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
             // pbxProdutos
             // 
@@ -331,7 +333,7 @@
             this.pbxProdutos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxProdutos.TabIndex = 10;
             this.pbxProdutos.TabStop = false;
-            this.pbxProdutos.Click += new System.EventHandler(this.pbxProdutos_Click);
+            this.pbxProdutos.Click += new System.EventHandler(this.produtosToolStripMenuItem_Click);
             // 
             // pbxVendas
             // 
@@ -344,7 +346,7 @@
             this.pbxVendas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxVendas.TabIndex = 9;
             this.pbxVendas.TabStop = false;
-            this.pbxVendas.Click += new System.EventHandler(this.pbxVendas_Click);
+            this.pbxVendas.Click += new System.EventHandler(this.vendasToolStripMenuItem_Click);
             // 
             // pbxDemonstrativo
             // 
@@ -357,7 +359,7 @@
             this.pbxDemonstrativo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxDemonstrativo.TabIndex = 8;
             this.pbxDemonstrativo.TabStop = false;
-            this.pbxDemonstrativo.Click += new System.EventHandler(this.pbxDemonstrativo_Click);
+            this.pbxDemonstrativo.Click += new System.EventHandler(this.demonstrativoToolStripMenuItem_Click);
             // 
             // pbxClientes
             // 
@@ -370,7 +372,7 @@
             this.pbxClientes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxClientes.TabIndex = 7;
             this.pbxClientes.TabStop = false;
-            this.pbxClientes.Click += new System.EventHandler(this.pbxClientes_Click);
+            this.pbxClientes.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // btnFechar
             // 
@@ -396,28 +398,6 @@
             this.btnFechar.UseVisualStyleBackColor = false;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // txtTotal
-            // 
-            this.txtTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTotal.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtTotal.Location = new System.Drawing.Point(15, 583);
-            this.txtTotal.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(240, 36);
-            this.txtTotal.TabIndex = 34;
-            // 
-            // lblPreço
-            // 
-            this.lblPreço.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblPreço.Location = new System.Drawing.Point(15, 552);
-            this.lblPreço.Margin = new System.Windows.Forms.Padding(6, 3, 6, 0);
-            this.lblPreço.Name = "lblPreço";
-            this.lblPreço.Size = new System.Drawing.Size(103, 28);
-            this.lblPreço.TabIndex = 33;
-            this.lblPreço.Text = "Total (R$)";
-            this.lblPreço.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 28F);
@@ -426,8 +406,6 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(900, 700);
-            this.Controls.Add(this.txtTotal);
-            this.Controls.Add(this.lblPreço);
             this.Controls.Add(this.btnFiltrar);
             this.Controls.Add(this.cbxTipo);
             this.Controls.Add(this.lblTipo);
@@ -436,7 +414,7 @@
             this.Controls.Add(this.lblVendas);
             this.Controls.Add(this.lblProdutos);
             this.Controls.Add(this.lblClientes);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.chtMenu);
             this.Controls.Add(this.pbxSobre);
             this.Controls.Add(this.pbxProdutos);
             this.Controls.Add(this.pbxVendas);
@@ -453,10 +431,11 @@
             this.Name = "frmMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
+            this.Activated += new System.EventHandler(this.frmMenu_Activated);
             this.Shown += new System.EventHandler(this.frmMenu_Shown);
             this.strMenu.ResumeLayout(false);
             this.strMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSobre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxProdutos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxVendas)).EndInit();
@@ -482,7 +461,7 @@
         private System.Windows.Forms.PictureBox pbxVendas;
         private System.Windows.Forms.PictureBox pbxProdutos;
         private System.Windows.Forms.PictureBox pbxSobre;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtMenu;
         private System.Windows.Forms.Label lblClientes;
         private System.Windows.Forms.Label lblProdutos;
         private System.Windows.Forms.Label lblVendas;
@@ -491,7 +470,5 @@
         private System.Windows.Forms.ComboBox cbxTipo;
         private System.Windows.Forms.Label lblTipo;
         private System.Windows.Forms.Button btnFiltrar;
-        private System.Windows.Forms.TextBox txtTotal;
-        private System.Windows.Forms.Label lblPreço;
     }
 }

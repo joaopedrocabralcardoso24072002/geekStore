@@ -27,7 +27,16 @@ namespace geekStore
         private void frmDemonstrativo_Load(object sender, EventArgs e)
         {
             CarregaCbxMes();
+            cbxMes.Text = string.Empty;
             cbxMes.Focus();
+        }
+
+        private void frmDemonstrativo_Shown(object sender, EventArgs e)
+        {
+            dgvDemonstrativo.Columns.Add("Nome", "Nome");
+            dgvDemonstrativo.Columns.Add("Quantidade", "Quantidade");
+            dgvDemonstrativo.Columns.Add("Preco", "Preço");
+            dgvDemonstrativo.Columns.Add("Total", "Total");
         }
 
         private void CarregaCbxMes()
@@ -66,19 +75,21 @@ namespace geekStore
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
+            string ano = string.Empty;
+            string mes = string.Empty;
             string[] partes = cbxMes.Text.Split('/');
             if (partes.Length == 2)
             {
                 Data = $"{partes[1]}/{partes[0]}";
+                mes = partes[0];
+                ano = partes[1];
             }
             else
             {
                 MessageBox.Show("Formato de data inválido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            /*SELECT v.dataVenda, p.nome AS Produto, pv.quantidade AS Quantidade, pv.valorUnitario AS ValorUnitario, pv.quantidade * pv.valorUnitario AS TotalProduto FROM Venda AS v JOIN ProdutoVenda AS pv ON v.Id = pv.Venda_Id JOIN Produto AS p ON pv.Produto_Id = p.Id WHERE MONTH(v.dataVenda) = @Data -- Replace ? with the desired month GROUP BY v.dataVenda, p.nome, pv.quantidade, pv.valorUnitario ORDER BY v.dataVenda, p.nome;*/
-
-            string sql = "SELECT COUNT(*) AS TotalVendas FROM Vendas WHERE FORMAT(dataVenda, 'yyyy/MM') = @Data GROUP BY YEAR(dataVenda), MONTH(dataVenda) ORDER BY YEAR(dataVenda), MONTH(dataVenda)";
+            string sql = "SELECT v.dataVenda, p.nome AS Nome, pv.quantidade AS Quantidade, pv.valorUnitário AS Preco, pv.quantidade * pv.valorUnitário AS Total FROM Vendas AS v JOIN ProdutosVendas AS pv ON v.Id = pv.idVenda JOIN Produtos AS p ON pv.idProduto = p.Id WHERE YEAR(v.dataVenda) = @ano AND MONTH(v.dataVenda) = @mes ORDER BY v.dataVenda, p.nome";
 
             if (con.State == ConnectionState.Open)
             {
@@ -87,13 +98,30 @@ namespace geekStore
             con.Open();
 
             SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@Data", Data);
+            cmd.Parameters.AddWithValue("@ano", ano);
+            cmd.Parameters.AddWithValue("@mes", mes);
 
             SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
+            while (dr.Read())
             {
-
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dgvDemonstrativo);
+                row.Cells[0].Value = dr[1].ToString();
+                row.Cells[1].Value = dr[2].ToString();
+                row.Cells[2].Value = dr[3].ToString();
+                row.Cells[3].Value = dr[4].ToString();
+                dgvDemonstrativo.Rows.Add(row);
             }
+            dr.Close();
+
+            con.Close();
+
+            decimal soma = 0;
+            foreach (DataGridViewRow dgvr in dgvDemonstrativo.Rows)
+            {
+                soma += Convert.ToDecimal(dgvr.Cells[3].Value);
+            }
+            txtTotal.Text = soma.ToString();
         }
     }
 }

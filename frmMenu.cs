@@ -11,11 +11,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace geekStore
 {
     public partial class frmMenu : Form
     {
+        private int IdTipo;
+
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbGeekStore"].ConnectionString);
 
         public frmMenu()
@@ -27,6 +31,15 @@ namespace geekStore
         private void frmMenu_Shown(object sender, EventArgs e)
         {
             CarregaCbxTipo();
+        }
+
+        private void frmMenu_Activated(object sender, EventArgs e)
+        {
+            if (chtMenu.Series["Nome"].Points.Count > 0)
+            {
+                chtMenu.Series["Nome"].Points.Clear();
+            }
+            CarregaGrafico();
         }
 
         private void CarregaCbxTipo()
@@ -45,19 +58,18 @@ namespace geekStore
 
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             DataSet ds = new DataSet();
-            da.Fill(ds, "Tipos"); // Vai para o banco e preenche o dataSet
+            da.Fill(ds, "Tipos");
 
             DataTable tiposTable = ds.Tables["Tipos"];
-            int proximoId = tiposTable.Rows.Count > 0
-                ? tiposTable.AsEnumerable().Max(row => row.Field<int>("Id")) + 1
-                : 1; // Caso não existam registros, começa com 1.
-
-            // Criar uma nova linha para o DataTable
+            int proximoId = 1;
+            if (tiposTable.Rows.Count > 0)
+            {
+                proximoId = tiposTable.AsEnumerable().Max(row => row.Field<int>("Id")) + 1;
+            }
             DataRow novaLinha = tiposTable.NewRow();
-            novaLinha["Id"] = proximoId; // Próximo Id
-            novaLinha["nome"] = "Todos"; // Nome exibido
-            tiposTable.Rows.Add(novaLinha); // Adiciona no final (ou use InsertAt para inserir no início)
-
+            novaLinha["Id"] = proximoId;
+            novaLinha["nome"] = "Todos";
+            tiposTable.Rows.Add(novaLinha);
 
             cbxTipo.ValueMember = "Id";
             cbxTipo.DisplayMember = "nome";
@@ -66,7 +78,89 @@ namespace geekStore
 
             con.Close();
 
-            cbxTipo.Text = string.Empty;
+            cbxTipo.SelectedValue = proximoId;
+            IdTipo = proximoId;
+        }
+
+        private void CarregaGrafico()
+        {
+            try
+            {
+                string sql = "SELECT t.nome AS 'Nome', COUNT(p.idTipo) AS 'Total' FROM Produtos p JOIN Tipos t ON p.idTipo = t.Id GROUP BY t.nome ";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+                con.Open();
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    int total = dr.GetInt32(dr.GetOrdinal("Total"));
+                    string nome = dr.GetString(dr.GetOrdinal("Nome"));
+
+                    var point = chtMenu.Series["Nome"].Points.AddXY(nome, total);
+
+                    var addedPoint = chtMenu.Series["Nome"].Points.Last(); 
+                    addedPoint.Label = total.ToString();
+                    addedPoint.LabelForeColor = Color.FromArgb(29, 108, 255);
+                    addedPoint.Font = new Font("Segoe Print", 14, FontStyle.Bold);
+                }                
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FiltroGrafico(int id)
+        {
+            if (chtMenu.Series["Nome"].Points.Count > 0)
+            {
+                chtMenu.Series["Nome"].Points.Clear();
+            }
+
+            try
+            {
+                if (id == IdTipo)
+                {
+                    CarregaGrafico();
+                }
+                else
+                {
+                    string sql = "SELECT TOP 7 p.nome AS 'Nome', SUM(pv.quantidade) AS 'Quantidade' FROM Produtos p JOIN ProdutosVendas pv ON p.Id = pv.idProduto JOIN Tipos t ON p.idTipo = t.Id WHERE p.idTipo = @idTipo GROUP BY p.nome ORDER BY SUM(pv.quantidade) DESC";
+
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@idTipo", id);
+
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+                    con.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        int quantidade = dr.GetInt32(dr.GetOrdinal("Quantidade"));
+                        string nome = dr.GetString(dr.GetOrdinal("Nome"));
+
+                        var point = chtMenu.Series["Nome"].Points.AddXY(nome, quantidade);
+
+                        var addedPoint = chtMenu.Series["Nome"].Points.Last();
+                        addedPoint.Label = quantidade.ToString();
+                        addedPoint.LabelForeColor = Color.FromArgb(29, 108, 255);
+                        addedPoint.Font = new Font("Segoe Print", 14, FontStyle.Bold);
+                    }
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,86 +203,6 @@ namespace geekStore
             this.Show();
         }
 
-        private void pbxClientes_Click(object sender, EventArgs e)
-        {
-            frmCadCli cadCli = new frmCadCli("menu");
-            this.Hide();
-            cadCli.ShowDialog();
-            this.Show();
-        }
-
-        private void lblClientes_Click(object sender, EventArgs e)
-        {
-            frmCadCli cadCli = new frmCadCli("menu");
-            this.Hide();
-            cadCli.ShowDialog();
-            this.Show();
-        }
-
-        private void pbxProdutos_Click(object sender, EventArgs e)
-        {
-            frmCadProd cadProd = new frmCadProd();
-            this.Hide();
-            cadProd.ShowDialog();
-            this.Show();
-        }
-
-        private void lblProdutos_Click(object sender, EventArgs e)
-        {
-            frmCadProd cadProd = new frmCadProd();
-            this.Hide();
-            cadProd.ShowDialog();
-            this.Show();
-        }
-
-        private void pbxVendas_Click(object sender, EventArgs e)
-        {
-            frmVendas vendas = new frmVendas();
-            this.Hide();
-            vendas.ShowDialog();
-            this.Show();
-        }
-
-        private void lblVendas_Click(object sender, EventArgs e)
-        {
-            frmVendas vendas = new frmVendas();
-            this.Hide();
-            vendas.ShowDialog();
-            this.Show();
-        }
-
-        private void pbxDemonstrativo_Click(object sender, EventArgs e)
-        {
-            frmDemonstrativo demonstrativo = new frmDemonstrativo();
-            this.Hide();
-            demonstrativo.ShowDialog();
-            this.Show();
-        }
-
-        private void lblDemonstrativo_Click(object sender, EventArgs e)
-        {
-            frmDemonstrativo demonstrativo = new frmDemonstrativo();
-            this.Hide();
-            demonstrativo.ShowDialog();
-            this.Show();
-        }
-
-        private void pbxSobre_Click(object sender, EventArgs e)
-        {
-            frmSobre sobre = new frmSobre();
-            this.Hide();
-            sobre.ShowDialog();
-            this.Show();
-        }
-
-        private void lblSobre_Click(object sender, EventArgs e)
-        {
-            frmSobre sobre = new frmSobre();
-            this.Hide();
-            sobre.ShowDialog();
-            this.Show();
-        }
-
         private void btnFechar_Click(object sender, EventArgs e)
         {
             DialogResult res = MessageBox.Show("Deseja mesmo sair da aplicação?", "Sair", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -201,7 +215,7 @@ namespace geekStore
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             int idTipo = cbxTipo.SelectedIndex + 1;
-            string sql = $"SELECT * FROM Produtos AS p JOIN Tipos AS t ON p.idTipo = t.Id WHERE p.idTipo = '{idTipo}'";
+            FiltroGrafico(idTipo);
         }
     }
 }
