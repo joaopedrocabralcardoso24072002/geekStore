@@ -15,6 +15,8 @@ namespace geekStore
 {
     public partial class frmDemonstrativo : Form
     {
+        private string Data;
+
         private readonly SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbGeekStore"].ConnectionString);
 
         public frmDemonstrativo()
@@ -32,7 +34,7 @@ namespace geekStore
         {
             try
             {
-                string sql = "SELECT CONCAT(MONTH(dataVenda), '/', YEAR(dataVenda)) FROM Vendas GROUP BY YEAR(dataVenda), MONTH(dataVenda)";
+                string sql = "SELECT CONCAT(MONTH(dataVenda), '/', YEAR(dataVenda)) AS Data FROM Vendas GROUP BY YEAR(dataVenda), MONTH(dataVenda)";
 
                 if (con.State == ConnectionState.Open)
                 {
@@ -48,8 +50,7 @@ namespace geekStore
 
                 da.Fill(ds, "Vendas");
 
-                cbxMes.ValueMember = "Id";
-                cbxMes.DisplayMember = "dataVenda";
+                cbxMes.DisplayMember = "Data";
                 cbxMes.DataSource = ds.Tables["Vendas"];
             }
             catch (Exception er)
@@ -65,7 +66,34 @@ namespace geekStore
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT YEAR(dataVenda) AS Ano, MONTH(dataVenda) AS Mes, COUNT(*) AS TotalVendas FROM Vendas GROUP BY YEAR(dataVenda), MONTH(dataVenda) ORDER BY Ano, Mes;";
+            string[] partes = cbxMes.Text.Split('/');
+            if (partes.Length == 2)
+            {
+                Data = $"{partes[1]}/{partes[0]}";
+            }
+            else
+            {
+                MessageBox.Show("Formato de data inválido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            /*SELECT v.dataVenda, p.nome AS Produto, pv.quantidade AS Quantidade, pv.valorUnitario AS ValorUnitario, pv.quantidade * pv.valorUnitario AS TotalProduto FROM Venda AS v JOIN ProdutoVenda AS pv ON v.Id = pv.Venda_Id JOIN Produto AS p ON pv.Produto_Id = p.Id WHERE MONTH(v.dataVenda) = @Data -- Replace ? with the desired month GROUP BY v.dataVenda, p.nome, pv.quantidade, pv.valorUnitario ORDER BY v.dataVenda, p.nome;*/
+
+            string sql = "SELECT COUNT(*) AS TotalVendas FROM Vendas WHERE FORMAT(dataVenda, 'yyyy/MM') = @Data GROUP BY YEAR(dataVenda), MONTH(dataVenda) ORDER BY YEAR(dataVenda), MONTH(dataVenda)";
+
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@Data", Data);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+
+            }
         }
     }
 }

@@ -182,11 +182,8 @@
     <None Include="Resources\geekStoreLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dbGeekStore.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="dbGeekStore.mdf" />
     <Content Include="dbGeekStore_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>dbGeekStore.mdf</DependentUpon>
     </Content>
     <None Include="Resources\add_cart_30.png" />
