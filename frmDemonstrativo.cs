@@ -24,48 +24,15 @@ namespace geekStore
 
         private void frmDemonstrativo_Load(object sender, EventArgs e)
         {
-            CarregaCbxProduto();
             CarregaCbxMes();
-            cbxProduto.Focus();
-        }
-
-        private void CarregaCbxProduto()
-        {
-            try
-            {
-                string sql = "SELECT Id, nome FROM Produtos ORDER BY nome";
-
-                if (con.State == ConnectionState.Open)
-                {
-                    con.Close();
-                }
-                con.Open();
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-
-                SqlDataAdapter da = new SqlDataAdapter(sql, con);
-
-                DataSet ds = new DataSet();
-
-                da.Fill(ds, "Produtos");
-
-                cbxProduto.ValueMember = "Id";
-                cbxProduto.DisplayMember = "nome";
-                cbxProduto.DataSource = ds.Tables["Produtos"];
-
-                con.Close();
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show($"Ocorreu um erro: {er.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            cbxMes.Focus();
         }
 
         private void CarregaCbxMes()
         {
             try
             {
-                string sql = "SELECT dataVenda FROM Vendas ORDER BY dataVenda ASC";
+                string sql = "SELECT CONCAT(MONTH(dataVenda), '/', YEAR(dataVenda)) FROM Vendas GROUP BY YEAR(dataVenda), MONTH(dataVenda)";
 
                 if (con.State == ConnectionState.Open)
                 {

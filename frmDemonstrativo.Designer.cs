@@ -33,8 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDemonstrativo));
-            this.cbxProduto = new System.Windows.Forms.ComboBox();
-            this.lblProduto = new System.Windows.Forms.Label();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
             this.pbxLogo = new System.Windows.Forms.PictureBox();
@@ -44,34 +42,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDemonstrativo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cbxProduto
-            // 
-            this.cbxProduto.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbxProduto.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
-            this.cbxProduto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(33)))));
-            this.cbxProduto.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbxProduto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbxProduto.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxProduto.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.cbxProduto.FormattingEnabled = true;
-            this.cbxProduto.Location = new System.Drawing.Point(15, 40);
-            this.cbxProduto.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.cbxProduto.Name = "cbxProduto";
-            this.cbxProduto.Size = new System.Drawing.Size(367, 25);
-            this.cbxProduto.TabIndex = 63;
-            // 
-            // lblProduto
-            // 
-            this.lblProduto.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProduto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblProduto.Location = new System.Drawing.Point(15, 9);
-            this.lblProduto.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblProduto.Name = "lblProduto";
-            this.lblProduto.Size = new System.Drawing.Size(103, 28);
-            this.lblProduto.TabIndex = 62;
-            this.lblProduto.Text = "Produto";
-            this.lblProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnPesquisar
             // 
@@ -87,7 +57,7 @@
             this.btnPesquisar.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnPesquisar.Image = global::geekStore.Properties.Resources.search_30;
             this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPesquisar.Location = new System.Drawing.Point(15, 145);
+            this.btnPesquisar.Location = new System.Drawing.Point(15, 127);
             this.btnPesquisar.Margin = new System.Windows.Forms.Padding(6, 40, 6, 40);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(125, 40);
@@ -110,7 +80,7 @@
             this.btnVoltar.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnVoltar.Image = global::geekStore.Properties.Resources.back_30;
             this.btnVoltar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVoltar.Location = new System.Drawing.Point(274, 145);
+            this.btnVoltar.Location = new System.Drawing.Point(273, 127);
             this.btnVoltar.Margin = new System.Windows.Forms.Padding(12);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(108, 40);
@@ -141,7 +111,7 @@
             this.cbxMes.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxMes.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.cbxMes.FormattingEnabled = true;
-            this.cbxMes.Location = new System.Drawing.Point(15, 105);
+            this.cbxMes.Location = new System.Drawing.Point(14, 58);
             this.cbxMes.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.cbxMes.Name = "cbxMes";
             this.cbxMes.Size = new System.Drawing.Size(367, 25);
@@ -151,7 +121,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(15, 74);
+            this.label1.Location = new System.Drawing.Point(15, 27);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 28);
@@ -190,7 +160,7 @@
             this.dgvDemonstrativo.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDemonstrativo.EnableHeadersVisualStyles = false;
             this.dgvDemonstrativo.GridColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvDemonstrativo.Location = new System.Drawing.Point(15, 209);
+            this.dgvDemonstrativo.Location = new System.Drawing.Point(15, 191);
             this.dgvDemonstrativo.Margin = new System.Windows.Forms.Padding(12);
             this.dgvDemonstrativo.Name = "dgvDemonstrativo";
             this.dgvDemonstrativo.ReadOnly = true;
@@ -205,7 +175,7 @@
             this.dgvDemonstrativo.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDemonstrativo.RowHeadersVisible = false;
             this.dgvDemonstrativo.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvDemonstrativo.Size = new System.Drawing.Size(564, 236);
+            this.dgvDemonstrativo.Size = new System.Drawing.Size(564, 254);
             this.dgvDemonstrativo.StandardTab = true;
             this.dgvDemonstrativo.TabIndex = 76;
             // 
@@ -220,8 +190,6 @@
             this.Controls.Add(this.pbxLogo);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnPesquisar);
-            this.Controls.Add(this.cbxProduto);
-            this.Controls.Add(this.lblProduto);
             this.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -238,8 +206,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cbxProduto;
-        private System.Windows.Forms.Label lblProduto;
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.Button btnVoltar;
         private System.Windows.Forms.PictureBox pbxLogo;

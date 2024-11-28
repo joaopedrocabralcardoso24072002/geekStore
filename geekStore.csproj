@@ -183,10 +183,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dbGeekStore.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="dbGeekStore_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>dbGeekStore.mdf</DependentUpon>
     </Content>
     <None Include="Resources\add_cart_30.png" />
