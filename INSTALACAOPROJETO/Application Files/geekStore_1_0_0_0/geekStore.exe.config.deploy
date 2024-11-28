@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+
+    <connectionStrings>
+		<add
+			name="dbGeekStore"
+			connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbGeekStore.mdf;Integrated Security=True;"
+			providerName="System.Data.SqlClient" />
+		</connectionStrings>
+</configuration>
+
+<!-- Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbGeekStore.mdf;Integrated Security=True; -->
+<!-- Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\pedro\source\repos\PedroWatermann\geekStore\dbGeekStore.mdf;Integrated Security=True; -->
